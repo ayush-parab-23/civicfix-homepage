@@ -84,7 +84,7 @@
   
   /* Footer */
   footer {
-    background-color: var(--primary-color);
+    background-color: rgb(24, 141, 208);
     color: white;
     text-align: center;
     padding: 2rem 1rem;
@@ -126,3 +126,4 @@
     }
   }
   
+
