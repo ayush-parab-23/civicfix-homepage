@@ -3,25 +3,25 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-  }
+}
   
-  :root {
+:root {
     --primary-color: #1E90FF; /* Dodger Blue */
     --accent-color: #FFA500;  /* Orange */
     --bg-light: #f9f9f9;
     --text-dark: #333;
     --white: #fff;
-  }
+}
   
-  body {
+body {
     font-family: 'Inter', sans-serif;
     line-height: 1.6;
     color: var(--text-dark);
-    padding-top: 70px; /* prevent navbar from overlapping */
-  }
+    padding-top: 70px;
+}
   
-  /* Hero Section */
-  .hero {
+/* Hero Section */
+.hero {
     min-height: 100vh;
     padding: 100px 0;
     background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),
@@ -32,66 +32,74 @@
     justify-content: center;
     text-align: center;
     color: white;
-  }
+}
   
-  /* Hero text container */
-  .bg-text-box {
+.bg-text-box {
     background: rgba(0,0,0,0.5);
     max-width: 700px;
     padding: 2rem;
     border-radius: 10px;
     margin: auto;
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
-  }
+}
   
-  .hero h1 {
+.hero h1 {
     font-size: 3rem;
     font-weight: 800;
     -webkit-text-stroke: 2px black;
     text-shadow: 0 0 10px rgba(0,0,0,0.6);
     margin-bottom: 20px;
     color: white;
-  }
+}
   
-  .hero p {
+.hero p {
     font-size: 1.25rem;
     color: #f0f0f0;
     margin-bottom: 30px;
-  }
+}
   
-  /* Foreground image */
-  .hero img.position-absolute {
+.hero img.position-absolute {
     width: 180px;
     opacity: 0.9;
-  }
+}
   
-  /* Features section */
-  .feature-icon {
+/* Features section (vertical alignment) */
+#features .row {
+    flex-direction: column;
+    align-items: center;
+}
+
+.feature-icon {
     font-size: 2.5rem;
     color: var(--primary-color);
-  }
+}
   
-  /* About section */
-  #about {
+/* About section */
+#about {
     padding: 3rem 2rem;
     background-color: var(--bg-light);
     text-align: center;
-  }
+}
   
-  #about h2 {
+#about h2 {
     margin-bottom: 1rem;
-  }
+}
   
-  /* Footer */
-  footer {
+/* Footer */
+footer {
     background-color: rgb(24, 141, 208);
     color: white;
     text-align: center;
     padding: 2rem 1rem;
-  }
+}
+
+.modal-content {
+    border-radius: 12px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.2);
+}
   
-  /* Responsive styles */
-  @media (max-width: 768px) {
+/* Responsive */
+@media (max-width: 768px) {
     .hero {
       padding: 60px 0;
     }
@@ -124,6 +132,4 @@
     footer {
       font-size: 0.9rem;
     }
-  }
-  
-
+}
