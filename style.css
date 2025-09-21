@@ -1,85 +1,143 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>CivicSense Dashboard</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="dashboard.css">
-</head>
-<body>
+/* Reset and global styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+  
+:root {
+    --primary-color: #1E90FF; /* Dodger Blue */
+    --accent-color: #FFA500;  /* Orange */
+    --bg-light: #f9f9f9;
+    --text-dark: #333;
+    --white: #fff;
+}
+  
+body {
+    font-family: 'Inter', sans-serif;
+    line-height: 1.6;
+    color: var(--text-dark);
+    padding-top: 70px; /* space for fixed navbar */
+    background-color: var(--white);
+}
+  
+/* Hero Section */
+.hero {
+    min-height: 100vh;
+    padding: 100px 0;
+    background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),
+                url('assets/civicback.jpg') center/cover no-repeat;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: white;
+}
+  
+.bg-text-box {
+    background: rgba(0,0,0,0.55);
+    max-width: 700px;
+    padding: 2rem;
+    border-radius: 10px;
+    margin: auto;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+}
 
-  <!-- Top Search -->
-  <div class="top-search">
-    <input type="text" placeholder="🔍 Search issue by keyword (e.g., pothole, garbage, streetlight)...">
-  </div>
+/* ✅ Updated Hero Title */
+.hero h1 {
+    font-size: 3.2rem;
+    font-weight: 900;
+    background: linear-gradient(90deg, #1E90FF, #FFA500);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 2px 2px 8px rgba(0,0,0,0.6);
+    margin-bottom: 20px;
+}
+  
+.hero p {
+    font-size: 1.25rem;
+    color: #f0f0f0;
+    margin-bottom: 30px;
+}
+  
+.hero img.position-absolute {
+    width: 180px;
+    opacity: 0.9;
+}
+  
+/* Features section (vertical alignment on smaller screens) */
+#features .row {
+    flex-direction: column;
+    align-items: center;
+}
 
-  <!-- Header with Emblem -->
-  <header>
-    <img src="https://upload.wikimedia.org/wikipedia/commons/3/3e/Emblem_of_India.svg" alt="India Emblem">
-    CivicSense – Crowd Powered Issue Reporting
-  </header>
+.feature-icon {
+    font-size: 2.5rem;
+    color: var(--primary-color);
+}
+  
+/* About section */
+#about {
+    padding: 3rem 2rem;
+    background-color: var(--bg-light);
+    text-align: center;
+}
+  
+#about h2 {
+    margin-bottom: 1rem;
+    font-weight: 700;
+}
+  
+/* Footer */
+footer {
+    background-color: var(--primary-color);
+    color: white;
+    text-align: center;
+    padding: 2rem 1rem;
+}
 
-  <!-- Mid Search -->
-  <div class="search-bar">
-    <input type="text" placeholder="Search for reported issues...">
-  </div>
+footer a {
+    text-decoration: none;
+}
 
-  <!-- Filters -->
-  <div class="filters">
-    <strong>Filter by Status:</strong>
-    <label><input type="radio" name="status"> Reported</label>
-    <label><input type="radio" name="status"> In-Progress</label>
-    <label><input type="radio" name="status"> Resolved</label>
-    <button onclick="openForm()">+ Report Issue</button>
-  </div>
-
-  <!-- Cards -->
-  <div class="grid">
-    <div class="card" style="background: linear-gradient(135deg, #ff6a88, #ffcc70);" onclick="openForm()"><h3>Potholes</h3><p>Report road damages</p></div>
-    <div class="card" style="background: linear-gradient(135deg, #4facfe, #00f2fe);" onclick="openForm()"><h3>Garbage</h3><p>Waste disposal issues</p></div>
-    <div class="card" style="background: linear-gradient(135deg, #f093fb, #f5576c);" onclick="openForm()"><h3>Streetlights</h3><p>Faulty streetlights</p></div>
-    <div class="card" style="background: linear-gradient(135deg, #ffecd2, #fcb69f);" onclick="openForm()"><h3>Water Leakage</h3><p>Pipeline issues</p></div>
-    <div class="card" style="background: linear-gradient(135deg, #43e97b, #38f9d7);" onclick="openForm()"><h3>Public Toilets</h3><p>Cleanliness issues</p></div>
-    <div class="card" style="background: linear-gradient(135deg, #fa709a, #fee140);" onclick="openForm()"><h3>Other Complaints</h3><p>Any other civic issue</p></div>
-    <div class="card" style="background: linear-gradient(135deg, #00c6ff, #0072ff);" onclick="openForm()"><h3>Park Maintenance</h3><p>Broken benches, greenery care</p></div>
-    <div class="card" style="background: linear-gradient(135deg, #ff9966, #ff5e62);" onclick="openForm()"><h3>Seasonal Issues</h3><p>Monsoon flooding, heat waves</p></div>
-    <div class="card" style="background: linear-gradient(135deg, #36d1dc, #5b86e5);" onclick="openForm()"><h3>Public Transport</h3><p>Buses, stops & infrastructure</p></div>
-  </div>
-
-  <!-- Statistics Section -->
-  <div class="stats">
-    <h2>📊 Civic Issue Statistics</h2>
-    <div class="stat-bar"><span>Reported Issues</span>
-      <div class="progress"><div class="reported">60%</div></div>
-    </div>
-    <div class="stat-bar"><span>In Progress</span>
-      <div class="progress"><div class="progressing">30%</div></div>
-    </div>
-    <div class="stat-bar"><span>Resolved</span>
-      <div class="progress"><div class="resolved">10%</div></div>
-    </div>
-  </div>
-
-  <!-- Report Form Modal -->
-  <div id="reportForm">
-    <div class="form-box">
-      <span class="close" onclick="closeForm()">✖</span>
-      <h2>Report an Issue</h2>
-      <form id="issueForm" enctype="multipart/form-data">
-        <input type="text" name="title" placeholder="Issue Title" required>
-        <textarea name="description" placeholder="Describe the problem..." required></textarea>
-        <input type="file" name="photo" accept="image/*" capture="environment" required>
-        <input type="text" name="location" placeholder="Enter location or allow GPS" required>
-        <button type="submit">📸 Submit Report</button>
-      </form>
-    </div>
-  </div>
-
-  <!-- Footer -->
-  <footer>
-    Powered by <span>Digital India</span> | Ministry of Urban Development, Govt. of India
-  </footer>
-
-  <script src="dashboard.js"></script>
-</body>
-</html>
+/* Modal */
+.modal-content {
+    border-radius: 12px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.2);
+}
+  
+/* Responsive */
+@media (max-width: 768px) {
+    .hero {
+      padding: 60px 0;
+    }
+  
+    .bg-text-box {
+      width: 90%;
+      padding: 1.2rem;
+    }
+  
+    .hero h1 {
+      font-size: 2rem;
+    }
+  
+    .hero p {
+      font-size: 1rem;
+    }
+  
+    .hero img.position-absolute {
+      width: 100px;
+      right: 1rem;
+      bottom: 1rem;
+    }
+  
+    nav .navbar-brand img {
+      width: 28px;
+      height: 28px;
+    }
+  
+    footer {
+      font-size: 0.9rem;
+    }
+}
