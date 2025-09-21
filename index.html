@@ -19,76 +19,85 @@
 
   <!-- Custom CSS -->
   <link rel="stylesheet" href="style.css">
-
 </head>
 <body>
 
   <!-- Header / Navbar -->
   <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top shadow-sm">
     <div class="container">
-      <a class="navbar-brand fw-bold d-flex align-items-center" href="#">
-        <!-- Make sure this file exists in assets and name matches exactly -->
+      <!-- CivicFix refresh button -->
+      <a class="navbar-brand fw-bold d-flex align-items-center" href="javascript:location.reload();">
         <img src="assets/civiclogo.png" alt="Logo" width="32" height="32" class="me-2">
         CivicFix
       </a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
         <span class="navbar-toggler-icon"></span>
       </button>
+
       <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-        <ul class="navbar-nav">
-          <li class="nav-item"><a class="nav-link" href="#hero">Home</a></li>
-          <li class="nav-item"><a class="nav-link" href="#features">Features</a></li>
-          <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
-          <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+        <ul class="navbar-nav align-items-lg-center">
+          <li class="nav-item"><a class="nav-link" href="#features" data-translate="navFeatures">Features</a></li>
+          <li class="nav-item"><a class="nav-link" href="#about" data-translate="navAbout">About</a></li>
+          <li class="nav-item"><a class="nav-link" href="#contact" data-translate="navContact">Contact</a></li>
+
+          <!-- Language Selector -->
+          <li class="nav-item dropdown ms-3">
+            <a class="btn btn-outline-primary dropdown-toggle" href="#" id="langDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              EN
+            </a>
+            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="langDropdown">
+              <li><a class="dropdown-item" href="#" data-lang="EN">English (EN)</a></li>
+              <li><a class="dropdown-item" href="#" data-lang="HN">हिन्दी (HN)</a></li>
+              <li><a class="dropdown-item" href="#" data-lang="MR">मराठी (MR)</a></li>
+            </ul>
+          </li>
         </ul>
       </div>
     </div>
   </nav>
 
   <!-- Hero Section -->
-  <!-- in index.html -->
-<section id="hero" class="hero d-flex align-items-center text-white position-relative">
+  <section id="hero" class="hero text-white position-relative">
     <div class="container text-center z-1">
       <div class="bg-text-box">
-        <h1 class="fw-bold">Empower Your City</h1>
-        <p>Report civic issues in real‑time and track resolutions.</p>
-        <a href="#features" class="btn btn-lg btn-warning mt-3">Get Started</a>
+        <h1 class="fw-bold" data-translate="heroTitle">Empower Your City</h1>
+        <p data-translate="heroDesc">Report civic issues in real-time and track resolutions.</p>
+        <a href="#" class="btn btn-lg btn-warning mt-3" data-bs-toggle="modal" data-bs-target="#loginModal" data-translate="getStarted">Get Started</a>
       </div>
       <img src="assets/civicfor12.png" alt="Icon"
            class="position-absolute bottom-0 end-0 me-3 mb-3">
     </div>
   </section>
   
-
   <!-- Features Section -->
   <section id="features" class="py-5" style="background-color: var(--bg-light);">
     <div class="container text-center">
-      <h2 class="fw-bold mb-5">Key Features</h2>
-      <div class="row g-4">
-        <div class="col-md-4">
+      <h2 class="fw-bold mb-5" data-translate="features">Key Features</h2>
+      <div class="row g-4 flex-column align-items-center">
+        <div class="col-md-6 col-lg-4">
           <div class="card h-100 shadow-sm border-0">
             <div class="card-body">
               <i class="fa-solid fa-camera feature-icon mb-3 text-primary"></i>
-              <h5 class="card-title fw-bold">Photo Reports</h5>
-              <p class="card-text">Capture and send photos of issues instantly from your phone.</p>
+              <h5 class="card-title fw-bold" data-translate="feature1Title">Photo Reports</h5>
+              <p class="card-text" data-translate="feature1Desc">Capture and send photos of issues instantly from your phone.</p>
             </div>
           </div>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-6 col-lg-4">
           <div class="card h-100 shadow-sm border-0">
             <div class="card-body">
               <i class="fa-solid fa-location-dot feature-icon mb-3 text-primary"></i>
-              <h5 class="card-title fw-bold">Auto Location Tagging</h5>
-              <p class="card-text">Automatically tag your current location for accurate reporting.</p>
+              <h5 class="card-title fw-bold" data-translate="feature2Title">Auto Location Tagging</h5>
+              <p class="card-text" data-translate="feature2Desc">Automatically tag your current location for accurate reporting.</p>
             </div>
           </div>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-6 col-lg-4">
           <div class="card h-100 shadow-sm border-0">
             <div class="card-body">
               <i class="fa-solid fa-bolt feature-icon mb-3 text-primary"></i>
-              <h5 class="card-title fw-bold">Fast Routing</h5>
-              <p class="card-text">System routes issues to the right department instantly.</p>
+              <h5 class="card-title fw-bold" data-translate="feature3Title">Fast Routing</h5>
+              <p class="card-text" data-translate="feature3Desc">System routes issues to the right department instantly.</p>
             </div>
           </div>
         </div>
@@ -96,18 +105,24 @@
     </div>
   </section>
 
-  <!-- About Section (you'll need to add this if missing) -->
+  <!-- About Section -->
   <section id="about" class="py-5 bg-light text-center">
     <div class="container">
-      <h2 class="fw-bold mb-4">About Our Mission</h2>
-      <p class="lead">CivicFix connects citizens to municipal services with transparency, speed, and trust.</p>
+      <h2 class="fw-bold mb-4" data-translate="aboutTitle">About Our Mission</h2>
+      <p class="lead" data-translate="aboutDesc">CivicFix connects citizens to municipal services with transparency, speed, and trust.</p>
     </div>
   </section>
 
   <!-- Contact / Footer -->
   <footer id="contact" class="text-white py-5" style="background-color: var(--primary-color);">
     <div class="container text-center">
-      <p class="mb-2">Contact us: <a href="mailto:info@civicfix.org" class="text-warning">info@civicfix.org</a></p>
+      <p class="mb-2">Contact us: 
+        <a href="mailto:info@civicfix.org" class="text-warning">info@civicfix.org</a>
+      </p>
+      <p class="mb-2">
+        <i class="fab fa-whatsapp text-success me-2"></i>
+        <a href="https://wa.me/919876543210" class="text-white">+91 98765 43210</a>
+      </p>
       <div class="mb-3">
         <a href="#" class="text-white me-3"><i class="fab fa-twitter fa-lg"></i></a>
         <a href="#" class="text-white me-3"><i class="fab fa-facebook fa-lg"></i></a>
@@ -124,5 +139,60 @@
   <script>
     AOS.init();
   </script>
+
+  <!-- Login Modal -->
+  <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content text-start">
+        <div class="modal-header">
+          <h5 class="modal-title fw-bold" id="loginModalLabel">Login to Continue</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body bg-white">
+          <form id="loginForm">
+            <div class="mb-3">
+              <label for="name" class="form-label">Full Name*</label>
+              <input type="text" class="form-control" id="name" required>
+            </div>
+            <div class="mb-3">
+              <label for="mobile" class="form-label">Mobile Number*</label>
+              <input type="tel" class="form-control" id="mobile" pattern="[0-9]{10}" maxlength="10" required>
+            </div>
+            <div class="mb-3">
+              <label for="state" class="form-label">Select State*</label>
+              <select class="form-select" id="state" required>
+                <option selected disabled value="">Choose your state</option>
+                <option>Andhra Pradesh</option>
+                <option>Assam</option>
+                <option>Bihar</option>
+                <option>Delhi</option>
+                <option>Gujarat</option>
+                <option>Haryana</option>
+                <option>Karnataka</option>
+                <option>Maharashtra</option>
+                <option>Punjab</option>
+                <option>Rajasthan</option>
+                <option>Tamil Nadu</option>
+                <option>Uttar Pradesh</option>
+                <option>West Bengal</option>
+              </select>
+            </div>
+            <div class="mb-3">
+              <label for="email" class="form-label">Email (optional)</label>
+              <input type="email" class="form-control" id="email">
+            </div>
+            <div class="mb-3">
+              <label for="otp" class="form-label">OTP</label>
+              <div class="input-group">
+                <input type="text" class="form-control" id="otp" maxlength="6" placeholder="Enter OTP">
+                <button class="btn btn-outline-primary" type="button" id="getOtpBtn">Get OTP</button>
+              </div>
+            </div>
+            <button type="submit" class="btn btn-warning w-100">Submit</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
 </body>
 </html>
