@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>CivicSense Dashboard</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="dashboard.css">
+</head>
+<body>
+
+  <!-- Top Search -->
+  <div class="top-search">
+    <input type="text" placeholder="🔍 Search issue by keyword (e.g., pothole, garbage, streetlight)...">
+  </div>
+
+  <!-- Header with Emblem -->
+  <header>
+    <img src="https://upload.wikimedia.org/wikipedia/commons/3/3e/Emblem_of_India.svg" alt="India Emblem">
+    CivicSense – Crowd Powered Issue Reporting
+  </header>
+
+  <!-- Mid Search -->
+  <div class="search-bar">
+    <input type="text" placeholder="Search for reported issues...">
+  </div>
+
+  <!-- Filters -->
+  <div class="filters">
+    <strong>Filter by Status:</strong>
+    <label><input type="radio" name="status"> Reported</label>
+    <label><input type="radio" name="status"> In-Progress</label>
+    <label><input type="radio" name="status"> Resolved</label>
+    <button onclick="openForm()">+ Report Issue</button>
+  </div>
+
+  <!-- Cards -->
+  <div class="grid">
+    <div class="card" style="background: linear-gradient(135deg, #ff6a88, #ffcc70);" onclick="openForm()"><h3>Potholes</h3><p>Report road damages</p></div>
+    <div class="card" style="background: linear-gradient(135deg, #4facfe, #00f2fe);" onclick="openForm()"><h3>Garbage</h3><p>Waste disposal issues</p></div>
+    <div class="card" style="background: linear-gradient(135deg, #f093fb, #f5576c);" onclick="openForm()"><h3>Streetlights</h3><p>Faulty streetlights</p></div>
+    <div class="card" style="background: linear-gradient(135deg, #ffecd2, #fcb69f);" onclick="openForm()"><h3>Water Leakage</h3><p>Pipeline issues</p></div>
+    <div class="card" style="background: linear-gradient(135deg, #43e97b, #38f9d7);" onclick="openForm()"><h3>Public Toilets</h3><p>Cleanliness issues</p></div>
+    <div class="card" style="background: linear-gradient(135deg, #fa709a, #fee140);" onclick="openForm()"><h3>Other Complaints</h3><p>Any other civic issue</p></div>
+    <div class="card" style="background: linear-gradient(135deg, #00c6ff, #0072ff);" onclick="openForm()"><h3>Park Maintenance</h3><p>Broken benches, greenery care</p></div>
+    <div class="card" style="background: linear-gradient(135deg, #ff9966, #ff5e62);" onclick="openForm()"><h3>Seasonal Issues</h3><p>Monsoon flooding, heat waves</p></div>
+    <div class="card" style="background: linear-gradient(135deg, #36d1dc, #5b86e5);" onclick="openForm()"><h3>Public Transport</h3><p>Buses, stops & infrastructure</p></div>
+  </div>
+
+  <!-- Statistics Section -->
+  <div class="stats">
+    <h2>📊 Civic Issue Statistics</h2>
+    <div class="stat-bar"><span>Reported Issues</span>
+      <div class="progress"><div class="reported">60%</div></div>
+    </div>
+    <div class="stat-bar"><span>In Progress</span>
+      <div class="progress"><div class="progressing">30%</div></div>
+    </div>
+    <div class="stat-bar"><span>Resolved</span>
+      <div class="progress"><div class="resolved">10%</div></div>
+    </div>
+  </div>
+
+  <!-- Report Form Modal -->
+  <div id="reportForm">
+    <div class="form-box">
+      <span class="close" onclick="closeForm()">✖</span>
+      <h2>Report an Issue</h2>
+      <form id="issueForm" enctype="multipart/form-data">
+        <input type="text" name="title" placeholder="Issue Title" required>
+        <textarea name="description" placeholder="Describe the problem..." required></textarea>
+        <input type="file" name="photo" accept="image/*" capture="environment" required>
+        <input type="text" name="location" placeholder="Enter location or allow GPS" required>
+        <button type="submit">📸 Submit Report</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    Powered by <span>Digital India</span> | Ministry of Urban Development, Govt. of India
+  </footer>
+
+  <script src="dashboard.js"></script>
+</body>
+</html>
