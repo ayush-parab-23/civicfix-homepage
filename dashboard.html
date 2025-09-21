@@ -1,85 +1,108 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>CivicFix Dashboard</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="dashboard.css">
-</head>
-<body>
-
-  <!-- Top Search -->
-  <div class="top-search">
-    <input type="text" placeholder="🔍 Search issue by keyword (e.g., pothole, garbage, streetlight)...">
-  </div>
-
-  <!-- Header with Emblem -->
-  <header>
-    <img src="assets/civiclogo.png" alt="India Emblem">
-    CivicFix – Crowd Powered Issue Reporting
-  </header>
-
-  <!-- Mid Search -->
-  <div class="search-bar">
-    <input type="text" placeholder="Search for reported issues...">
-  </div>
-
-  <!-- Filters -->
-  <div class="filters">
-    <strong>Filter by Status:</strong>
-    <label><input type="radio" name="status"> Reported</label>
-    <label><input type="radio" name="status"> In-Progress</label>
-    <label><input type="radio" name="status"> Resolved</label>
-    <button onclick="openForm()">+ Report Issue</button>
-  </div>
-
-  <!-- Cards -->
-  <div class="grid">
-    <div class="card" style="background: linear-gradient(135deg, #ff6a88, #ffcc70);" onclick="openForm()"><h3>Potholes</h3><p>Report road damages</p></div>
-    <div class="card" style="background: linear-gradient(135deg, #4facfe, #00f2fe);" onclick="openForm()"><h3>Garbage</h3><p>Waste disposal issues</p></div>
-    <div class="card" style="background: linear-gradient(135deg, #f093fb, #f5576c);" onclick="openForm()"><h3>Streetlights</h3><p>Faulty streetlights</p></div>
-    <div class="card" style="background: linear-gradient(135deg, #ffecd2, #fcb69f);" onclick="openForm()"><h3>Water Leakage</h3><p>Pipeline issues</p></div>
-    <div class="card" style="background: linear-gradient(135deg, #43e97b, #38f9d7);" onclick="openForm()"><h3>Public Toilets</h3><p>Cleanliness issues</p></div>
-    <div class="card" style="background: linear-gradient(135deg, #fa709a, #fee140);" onclick="openForm()"><h3>Other Complaints</h3><p>Any other civic issue</p></div>
-    <div class="card" style="background: linear-gradient(135deg, #00c6ff, #0072ff);" onclick="openForm()"><h3>Park Maintenance</h3><p>Broken benches, greenery care</p></div>
-    <div class="card" style="background: linear-gradient(135deg, #ff9966, #ff5e62);" onclick="openForm()"><h3>Seasonal Issues</h3><p>Monsoon flooding, heat waves</p></div>
-    <div class="card" style="background: linear-gradient(135deg, #36d1dc, #5b86e5);" onclick="openForm()"><h3>Public Transport</h3><p>Buses, stops & infrastructure</p></div>
-  </div>
-
-  <!-- Statistics Section -->
-  <div class="stats">
-    <h2>📊 Civic Issue Statistics</h2>
-    <div class="stat-bar"><span>Reported Issues</span>
-      <div class="progress"><div class="reported">60%</div></div>
-    </div>
-    <div class="stat-bar"><span>In Progress</span>
-      <div class="progress"><div class="progressing">30%</div></div>
-    </div>
-    <div class="stat-bar"><span>Resolved</span>
-      <div class="progress"><div class="resolved">10%</div></div>
-    </div>
-  </div>
-
-  <!-- Report Form Modal -->
-  <div id="reportForm">
-    <div class="form-box">
-      <span class="close" onclick="closeForm()">✖</span>
-      <h2>Report an Issue</h2>
-      <form id="issueForm" enctype="multipart/form-data">
-        <input type="text" name="title" placeholder="Issue Title" required>
-        <textarea name="description" placeholder="Describe the problem..." required></textarea>
-        <input type="file" name="photo" accept="image/*" capture="environment" required>
-        <input type="text" name="location" placeholder="Enter location or allow GPS" required>
-        <button type="submit">📸 Submit Report</button>
-      </form>
-    </div>
-  </div>
-
-  <!-- Footer -->
-  <footer>
-    Powered by <span>Digital India</span> | Ministry of Urban Development, Govt. of India
-  </footer>
-
-  <script src="dashboard.js"></script>
-</body>
-</html>
+body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  min-height: 100vh;
+  background: linear-gradient(to bottom right, #ff9933, #ffffff, #138808);
+  position: relative;
+  overflow-x: hidden;
+}
+body::before {
+  content: "";
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: url("https://upload.wikimedia.org/wikipedia/commons/1/17/Ashoka_Chakra.svg") no-repeat center;
+  background-size: 60%;
+  opacity: 0.08;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+}
+header {
+  background: rgba(0,0,0,0.8);
+  color: white;
+  padding: 15px;
+  text-align: center;
+  font-size: 26px;
+  font-weight: 700;
+  border-bottom: 4px solid #138808;
+  position: relative;
+}
+header img {
+  position: absolute;
+  top: 5px;
+  left: 20px;
+  height: 65px;
+}
+.top-search { background: #fff; padding: 15px; text-align: center; box-shadow: 0 2px 6px rgba(0,0,0,0.15); }
+.top-search input { width: 70%; padding: 12px 20px; border-radius: 25px; border: 2px solid #ff9933; font-size: 16px; }
+.top-search input:focus { border-color: #138808; box-shadow: 0 0 8px rgba(19,136,8,0.5); }
+.search-bar { margin: 20px auto; text-align: center; }
+.search-bar input { padding: 10px 20px; width: 60%; border: 2px solid #138808; border-radius: 25px; font-size: 16px; }
+.filters { margin: 20px; text-align: center; font-size: 16px; font-weight: 600; }
+.filters label { margin: 0 10px; }
+.filters button {
+  margin-left: 20px; padding: 10px 20px;
+  background: #138808; color: #fff;
+  border: 2px solid #fff; border-radius: 25px;
+  cursor: pointer; transition: 0.3s; font-weight: 600;
+}
+.filters button:hover { background: #0b5e29; }
+.grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 25px; padding: 20px; }
+.card {
+  border-radius: 15px;
+  border: 2px solid #fff;
+  box-shadow: 0 6px 15px rgba(0,0,0,0.25);
+  text-align: center; padding: 20px;
+  cursor: pointer; transition: 0.3s;
+  color: white; font-family: 'Roboto', sans-serif;
+  font-weight: 500;
+}
+.card:hover {
+  transform: translateY(-6px) scale(1.04);
+  box-shadow: 0 12px 25px rgba(0,0,0,0.35);
+  border: 3px solid #ff9933;
+}
+.card h3 { margin: 10px 0; font-weight: 700; font-size: 20px; }
+.stats {
+  background: rgba(255,255,255,0.95);
+  padding: 20px;
+  margin: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+.stats h2 { text-align: center; color: #0b5e29; margin-bottom: 20px; }
+.stat-bar { margin: 15px 0; }
+.stat-bar span { font-weight: 600; }
+.progress { height: 20px; border-radius: 10px; background: #eee; overflow: hidden; margin-top: 5px; }
+.progress div { height: 100%; text-align: right; padding-right: 5px; color: white; font-size: 14px; font-weight: bold; }
+.reported { background: #ff9933; width: 60%; }
+.progressing { background: #138808; width: 30%; }
+.resolved { background: #0077b6; width: 10%; }
+#reportForm { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 999; }
+.form-box {
+  background: #fff; width: 50%; margin: 50px auto;
+  padding: 25px; border-radius: 15px;
+  border: 4px solid #ff9933;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.4);
+}
+.form-box h2 { text-align: center; margin-bottom: 15px; color: #138808; font-weight: 700; }
+.form-box input, .form-box textarea {
+  width: 100%; padding: 12px; margin: 10px 0;
+  border-radius: 8px; border: 2px solid #ccc; font-size: 15px;
+}
+.form-box button {
+  padding: 12px 25px; border: none; background: #138808;
+  color: white; border-radius: 25px; cursor: pointer;
+  transition: 0.3s; font-weight: 600;
+}
+.form-box button:hover { background: #0b5e29; }
+.close { float: right; cursor: pointer; font-size: 22px; color: red; font-weight: bold; }
+footer {
+  background: rgba(0,0,0,0.85); color: white;
+  text-align: center; padding: 15px;
+  border-top: 4px solid #ff9933;
+  font-size: 14px; font-weight: 500;
+}
+footer span { color: #ff9933; font-weight: 700; }
