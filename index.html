@@ -141,13 +141,16 @@
   </script>
 
   <!-- Redirect to dashboard after login -->
-  <script>
-    document.getElementById("loginForm").addEventListener("submit", function (e) {
-      e.preventDefault();
-      // ✅ redirect to dashboard page
-      window.location.href = "pages/dashboard.html";
-    });
-  </script>
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  const loginForm = document.getElementById("loginForm");
+  loginForm.addEventListener("submit", function(e) {
+    e.preventDefault();
+    window.location.href = "dashboard.html";
+  });
+});
+</script>
+
 
   <!-- Login Modal -->
   <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
@@ -205,4 +208,3 @@
   </div>
 </body>
 </html>
-
