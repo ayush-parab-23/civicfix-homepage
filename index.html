@@ -140,6 +140,15 @@
     AOS.init();
   </script>
 
+  <!-- Redirect to dashboard after login -->
+  <script>
+    document.getElementById("loginForm").addEventListener("submit", function (e) {
+      e.preventDefault();
+      // ✅ redirect to dashboard page
+      window.location.href = "dashboard.html";
+    });
+  </script>
+
   <!-- Login Modal -->
   <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
@@ -194,6 +203,5 @@
       </div>
     </div>
   </div>
-  
 </body>
 </html>
