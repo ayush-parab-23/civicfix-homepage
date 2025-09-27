@@ -113,6 +113,105 @@
     </div>
   </section>
 
+    <!-- Problems Demo Section -->
+  <section id="demo-problems" class="py-5">
+    <div class="container">
+      <h2 class="fw-bold text-center mb-5">Sample Reported Problems</h2>
+      <div class="row g-4">
+        
+        <!-- Problem 1 -->
+        <div class="col-md-4">
+          <div class="card h-100 shadow-sm problem-card">
+            <img src="assets/problem1.jpg" class="card-img-top" alt="Pothole on Road">
+            <div class="card-body">
+              <h5 class="card-title fw-bold">Pothole on Main Road</h5>
+              <p class="card-text">Large pothole causing traffic jams and accidents.</p>
+              <p class="text-muted"><i class="fa-solid fa-location-dot text-danger"></i> MG Road, Pune</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Problem 2 -->
+        <div class="col-md-4">
+          <div class="card h-100 shadow-sm problem-card">
+            <img src="assets/problem2.jpg" class="card-img-top" alt="Garbage Dump">
+            <div class="card-body">
+              <h5 class="card-title fw-bold">Garbage Not Collected</h5>
+              <p class="card-text">Overflowing garbage dump causing foul smell in area.</p>
+              <p class="text-muted"><i class="fa-solid fa-location-dot text-danger"></i> Andheri East, Mumbai</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Problem 3 -->
+        <div class="col-md-4">
+          <div class="card h-100 shadow-sm problem-card">
+            <img src="assets/problem3.jpg" class="card-img-top" alt="Streetlight">
+            <div class="card-body">
+              <h5 class="card-title fw-bold">Streetlight Not Working</h5>
+              <p class="card-text">Streetlight broken for weeks, area unsafe at night.</p>
+              <p class="text-muted"><i class="fa-solid fa-location-dot text-danger"></i> Sector 21, Delhi</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+    <!-- Reviews Section -->
+  <section id="reviews" class="py-5">
+    <div class="container">
+      <h2 class="fw-bold text-center mb-5">What People Say</h2>
+
+      <div id="reviewCarousel" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+
+          <!-- Review 1 -->
+          <div class="carousel-item active">
+            <div class="review-card mx-auto text-center p-4">
+              <img src="assets/user1.jpg" alt="User 1" class="rounded-circle mb-3" width="80" height="80">
+              <p class="mb-3">"CivicFix made it so easy to report the pothole near my house. The issue was resolved within a week!"</p>
+              <h6 class="fw-bold">Amit Sharma</h6>
+              <small class="text-muted">Pune, Maharashtra</small>
+            </div>
+          </div>
+
+          <!-- Review 2 -->
+          <div class="carousel-item">
+            <div class="review-card mx-auto text-center p-4">
+              <img src="assets/user2.jpg" alt="User 2" class="rounded-circle mb-3" width="80" height="80">
+              <p class="mb-3">"Very user-friendly platform. I could upload a picture of a broken streetlight instantly."</p>
+              <h6 class="fw-bold">Sneha Patel</h6>
+              <small class="text-muted">Ahmedabad, Gujarat</small>
+            </div>
+          </div>
+
+          <!-- Review 3 -->
+          <div class="carousel-item">
+            <div class="review-card mx-auto text-center p-4">
+              <img src="assets/user3.jpg" alt="User 3" class="rounded-circle mb-3" width="80" height="80">
+              <p class="mb-3">"Great initiative! Helps us citizens directly connect with the right authorities."</p>
+              <h6 class="fw-bold">Rahul Mehta</h6>
+              <small class="text-muted">Delhi</small>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Carousel controls -->
+        <button class="carousel-control-prev" type="button" data-bs-target="#reviewCarousel" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon"></span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#reviewCarousel" data-bs-slide="next">
+          <span class="carousel-control-next-icon"></span>
+        </button>
+      </div>
+    </div>
+  </section>
+
+
+
   <!-- Contact / Footer -->
   <footer id="contact" class="text-white py-5" style="background-color: var(--primary-color);">
     <div class="container text-center">
@@ -132,75 +231,78 @@
     </div>
   </footer>
 
-  <!-- Scripts -->
+   <!-- Scripts -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script src="lang.js"></script>
   <script src="script.js"></script>
   <script>
     AOS.init();
   </script>
 
   <!-- Redirect to dashboard after login -->
-<script>
-document.addEventListener("DOMContentLoaded", function() {
-  const loginForm = document.getElementById("loginForm");
-  loginForm.addEventListener("submit", function(e) {
-    e.preventDefault();
-    window.location.href = "dashboard.html";
+  <script>
+  document.addEventListener("DOMContentLoaded", function() {
+    const loginForm = document.getElementById("loginForm");
+    if (loginForm) {
+      loginForm.addEventListener("submit", function(e) {
+        e.preventDefault();
+        window.location.href = "dashboard.html";
+      });
+    }
   });
-});
-</script>
-
+  </script>
 
   <!-- Login Modal -->
   <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content text-start">
         <div class="modal-header">
-          <h5 class="modal-title fw-bold" id="loginModalLabel">Login to Continue</h5>
+          <h5 class="modal-title fw-bold" id="loginModalLabel" data-translate="loginTitle">Login to Continue</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body bg-white">
           <form id="loginForm">
             <div class="mb-3">
-              <label for="name" class="form-label">Full Name*</label>
+              <label for="name" class="form-label" data-translate="loginName">Full Name*</label>
               <input type="text" class="form-control" id="name" required>
             </div>
             <div class="mb-3">
-              <label for="mobile" class="form-label">Mobile Number*</label>
+              <label for="mobile" class="form-label" data-translate="loginMobile">Mobile Number*</label>
               <input type="tel" class="form-control" id="mobile" pattern="[0-9]{10}" maxlength="10" required>
             </div>
             <div class="mb-3">
-              <label for="state" class="form-label">Select State*</label>
+              <label for="state" class="form-label" data-translate="loginState">Select State*</label>
               <select class="form-select" id="state" required>
                 <option selected disabled value="">Choose your state</option>
-                <option>Andhra Pradesh</option>
-                <option>Assam</option>
-                <option>Bihar</option>
-                <option>Delhi</option>
-                <option>Gujarat</option>
-                <option>Haryana</option>
-                <option>Karnataka</option>
-                <option>Maharashtra</option>
-                <option>Punjab</option>
-                <option>Rajasthan</option>
-                <option>Tamil Nadu</option>
-                <option>Uttar Pradesh</option>
-                <option>West Bengal</option>
+                <option data-translate="stateAP">Andhra Pradesh</option>
+                <option data-translate="stateAS">Assam</option>
+                <option data-translate="stateBR">Bihar</option>
+                <option data-translate="stateDL">Delhi</option>
+                <option data-translate="stateGJ">Gujarat</option>
+                <option data-translate="stateHR">Haryana</option>
+                <option data-translate="stateKA">Karnataka</option>
+                <option data-translate="stateMH">Maharashtra</option>
+                <option data-translate="statePB">Punjab</option>
+                <option data-translate="stateRJ">Rajasthan</option>
+                <option data-translate="stateTN">Tamil Nadu</option>
+                <option data-translate="stateUP">Uttar Pradesh</option>
+                <option data-translate="stateWB">West Bengal</option>
               </select>
+
             </div>
             <div class="mb-3">
-              <label for="email" class="form-label">Email (optional)</label>
+              <label for="email" class="form-label" data-translate="loginEmail">Email (optional)</label>
               <input type="email" class="form-control" id="email">
             </div>
             <div class="mb-3">
-              <label for="otp" class="form-label">OTP</label>
+              <label for="otp" class="form-label" data-translate="loginOtp">OTP</label>
               <div class="input-group">
                 <input type="text" class="form-control" id="otp" maxlength="6" placeholder="Enter OTP">
-                <button class="btn btn-outline-primary" type="button" id="getOtpBtn">Get OTP</button>
+                <button class="btn btn-outline-primary" type="button" id="getOtpBtn" data-translate="loginGetOtp">Get OTP</button>
               </div>
             </div>
-            <button type="submit" class="btn btn-warning w-100">Submit</button>
+            <button type="submit" class="btn btn-warning w-100" data-translate="loginSubmit">Submit</button>
           </form>
         </div>
       </div>
