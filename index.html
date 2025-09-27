@@ -231,14 +231,12 @@
     </div>
   </footer>
 
-   <!-- Scripts -->
+ <!-- Scripts -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <script src="lang.js"></script>
   <script src="script.js"></script>
-  <script>
-    AOS.init();
-  </script>
+  <script>AOS.init();</script>
 
   <!-- Redirect to dashboard after login -->
   <script>
@@ -261,20 +259,20 @@
           <h5 class="modal-title fw-bold" id="loginModalLabel" data-translate="loginTitle">Login to Continue</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-        <div class="modal-body bg-white">
-          <form id="loginForm">
-            <div class="mb-3">
-              <label for="name" class="form-label" data-translate="loginName">Full Name*</label>
-              <input type="text" class="form-control" id="name" required>
-            </div>
-            <div class="mb-3">
-              <label for="mobile" class="form-label" data-translate="loginMobile">Mobile Number*</label>
-              <input type="tel" class="form-control" id="mobile" pattern="[0-9]{10}" maxlength="10" required>
-            </div>
-            <div class="mb-3">
+      <div class="modal-body bg-white">
+        <form id="loginForm">
+        <div class="mb-3">
+          <label for="name" class="form-label" data-translate="loginName">Full Name*</label>
+          <input type="text" class="form-control" id="name" required>
+        </div>
+        <div class="mb-3">
+        <label for="mobile" class="form-label" data-translate="loginMobile">Mobile Number*</label>
+        <input type="tel" class="form-control" id="mobile" pattern="[0-9]{10}" maxlength="10" required>
+        </div>
+        <div class="mb-3">
               <label for="state" class="form-label" data-translate="loginState">Select State*</label>
               <select class="form-select" id="state" required>
-                <option selected disabled value="">Choose your state</option>
+                <option selected disabled value="" data-translate="statePlaceholder">Choose your state</option>
                 <option data-translate="stateAP">Andhra Pradesh</option>
                 <option data-translate="stateAS">Assam</option>
                 <option data-translate="stateBR">Bihar</option>
@@ -289,22 +287,21 @@
                 <option data-translate="stateUP">Uttar Pradesh</option>
                 <option data-translate="stateWB">West Bengal</option>
               </select>
-
             </div>
             <div class="mb-3">
-              <label for="email" class="form-label" data-translate="loginEmail">Email (optional)</label>
-              <input type="email" class="form-control" id="email">
-            </div>
-            <div class="mb-3">
-              <label for="otp" class="form-label" data-translate="loginOtp">OTP</label>
-              <div class="input-group">
-                <input type="text" class="form-control" id="otp" maxlength="6" placeholder="Enter OTP">
-                <button class="btn btn-outline-primary" type="button" id="getOtpBtn" data-translate="loginGetOtp">Get OTP</button>
-              </div>
-            </div>
-            <button type="submit" class="btn btn-warning w-100" data-translate="loginSubmit">Submit</button>
-          </form>
-        </div>
+      <label for="email" class="form-label" data-translate="loginEmail">Email (optional)</label>
+      <input type="email" class="form-control" id="email">
+    </div>
+    <div class="mb-3">
+      <label for="otp" class="form-label" data-translate="loginOtp">OTP</label>
+      <div class="input-group">
+        <input type="text" class="form-control" id="otp" maxlength="6" placeholder="Enter OTP">
+        <button class="btn btn-outline-primary" type="button" id="getOtpBtn" data-translate="loginGetOtp">Get OTP</button>
+      </div>
+    </div>
+    <button type="submit" class="btn btn-warning w-100" data-translate="loginSubmit">Submit</button>
+  </form>
+</div>
       </div>
     </div>
   </div>
