@@ -46,16 +46,18 @@ body {
 .hero h1 {
     font-size: 3rem;
     font-weight: 800;
-    -webkit-text-stroke: 2px black;
-    text-shadow: 0 0 10px rgba(0,0,0,0.6);
+    background: linear-gradient(90deg, #ff9933, #ffffff, #138808); /* Tricolor */
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 2px 2px 6px rgba(0,0,0,0.4);
     margin-bottom: 20px;
-    color: white;
 }
   
 .hero p {
     font-size: 1.25rem;
     color: #f0f0f0;
     margin-bottom: 30px;
+    text-shadow: 1px 1px 4px rgba(0,0,0,0.5);
 }
   
 .hero img.position-absolute {
@@ -110,8 +112,7 @@ footer {
     }
   
     .hero h1 {
-      font-size: 2rem;
-      -webkit-text-stroke: 1px black;
+      font-size: 2.2rem;
     }
   
     .hero p {
@@ -178,5 +179,3 @@ footer {
   border: 3px solid var(--primary-color);
   object-fit: cover;
 }
-
-
