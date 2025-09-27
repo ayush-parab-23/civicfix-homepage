@@ -1,13 +1,15 @@
-// script.js
+// script.js - small glue code for index.html
+
 document.addEventListener("DOMContentLoaded", function () {
-  loadLanguage(); // apply saved language (from lang.js)
+  // apply stored language
+  if (typeof loadLanguage === "function") loadLanguage();
 
   const otpBtn = document.getElementById("getOtpBtn");
   if (otpBtn) {
     otpBtn.addEventListener("click", function () {
       const mobileEl = document.getElementById("mobile");
-      const mobile = mobileEl ? mobileEl.value : "";
-      if (mobile.length === 10) {
+      const mobile = mobileEl ? mobileEl.value.trim() : "";
+      if (/^\d{10}$/.test(mobile)) {
         alert("OTP sent to " + mobile);
       } else {
         alert("Please enter a valid 10-digit mobile number.");
@@ -22,13 +24,13 @@ document.addEventListener("DOMContentLoaded", function () {
       window.location.href = "dashboard.html"; // redirect after login
     });
   }
-});
 
-// Event listeners for language dropdown
-document.querySelectorAll(".dropdown-item[data-lang]").forEach(item => {
-  item.addEventListener("click", (e) => {
-    e.preventDefault();
-    const langCode = e.target.getAttribute("data-lang");
-    changeLanguage(langCode);
+  // safety: attach dropdown handlers
+  document.querySelectorAll(".dropdown-item[data-lang]").forEach(item => {
+    item.addEventListener("click", (e) => {
+      e.preventDefault();
+      const langCode = e.target.getAttribute("data-lang");
+      if (typeof setLanguage === "function") setLanguage(langCode);
+    });
   });
 });
