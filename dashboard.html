@@ -8,180 +8,133 @@
   <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
 
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
   <!-- CSS -->
   <link rel="stylesheet" href="dashboard.css">
 </head>
 <body>
 
-  <!-- Top Search -->
-  <div class="top-search">
-    <input type="text" placeholder="🔍 Search issue by keyword (e.g., pothole, garbage, streetlight)...">
-  </div>
-
-  <!-- Header -->
+  <!-- Header with Emblem + Account -->
   <header>
     <div class="header-inner">
-      <img src="assets/civiclogo.png" alt="CivicFix logo" class="header-logo">
-      <div class="header-title">CivicFix – Crowd Powered Issue Reporting</div>
+      <div style="display:flex; align-items:center; gap:12px;">
+        <img src="assets/civiclogo.png" alt="CivicFix logo" class="header-logo">
+        <div class="header-title">CivicFix – Crowd Powered Issue Reporting</div>
+      </div>
+
+      <!-- Account Dropdown inside header -->
+      <div class="account-dropdown">
+        <button class="account-btn" aria-expanded="false" aria-haspopup="true">👤</button>
+        <div class="account-menu" role="menu" aria-hidden="true">
+          <a href="#" data-translate="manageAccount" id="acct-manage">Manage My Account</a>
+          <a href="#" data-translate="reportStatus" id="acct-status">Report Status</a>
+          <a href="#" data-translate="feedback" id="acct-feedback">My Feedback</a>
+          <a href="#" data-translate="savedLocations" id="acct-locations">Saved Locations</a>
+          <a href="index.html" data-translate="logout" id="acct-logout">Logout</a>
+        </div>
+      </div>
     </div>
   </header>
 
-  <!-- Account Circular Button -->
-  <div class="account-dropdown">
-    <button class="account-btn" onclick="toggleAccountMenu()">👤</button>
-    <div id="accountMenu" class="account-menu">
-      <a href="#" onclick="openSection('manageAccount')" data-translate="manageAccount">Manage My Account</a>
-      <a href="#" onclick="openSection('reportStatus')" data-translate="reportStatus">Report Status</a>
-      <a href="#" onclick="openSection('feedback')" data-translate="feedback">My Feedback</a>
-      <a href="#" onclick="openSection('savedLocations')" data-translate="savedLocations">Saved Locations</a>
-      <a href="index.html" data-translate="logout">Logout</a>
-    </div>
-  </div>
-
-  <!-- Mid Search -->
-  <div class="search-bar">
-    <input type="text" placeholder="Search for reported issues...">
+  <!-- Top Search -->
+  <div class="top-search">
+    <input id="topSearch" type="text" placeholder="🔍 Search issue by keyword (e.g., pothole, garbage, streetlight)...">
   </div>
 
   <!-- Filters -->
   <div class="filters">
-    <strong>Filter by Status:</strong>
-    <label><input type="radio" name="status"> Reported</label>
-    <label><input type="radio" name="status"> In-Progress</label>
-    <label><input type="radio" name="status"> Resolved</label>
-    <button onclick="openForm()">+ Report Issue</button>
+    <strong data-translate="filterBy">Filter by Status:</strong>
+    <label><input type="radio" name="status"> <span data-translate="statusLabelReported">Reported</span></label>
+    <label><input type="radio" name="status"> <span data-translate="statusLabelProgress">In-Progress</span></label>
+    <label><input type="radio" name="status"> <span data-translate="statusLabelResolved">Resolved</span></label>
+    <button id="reportBtn" onclick="openForm()" data-translate="reportButton">+ Report Issue</button>
   </div>
 
   <!-- Cards -->
   <div class="grid" role="list">
     <div class="card" style="background: linear-gradient(135deg, #ff6a88, #ffcc70);" onclick="openForm()" role="listitem">
-      <h3 data-translate="btnPotholes">Potholes</h3><p data-translate="btnPotholesDesc">Report road damages</p>
+      <h3 data-translate="btnPotholes">Potholes</h3>
+      <p data-translate="btnPotholesDesc">Report road damages</p>
     </div>
+
     <div class="card" style="background: linear-gradient(135deg, #4facfe, #00f2fe);" onclick="openForm()" role="listitem">
-      <h3 data-translate="btnGarbage">Garbage</h3><p data-translate="btnGarbageDesc">Waste disposal issues</p>
+      <h3 data-translate="btnGarbage">Garbage</h3>
+      <p data-translate="btnGarbageDesc">Waste disposal issues</p>
     </div>
+
     <div class="card" style="background: linear-gradient(135deg, #f093fb, #f5576c);" onclick="openForm()" role="listitem">
-      <h3 data-translate="btnStreetlights">Streetlights</h3><p data-translate="btnStreetlightsDesc">Faulty streetlights</p>
+      <h3 data-translate="btnStreetlights">Streetlights</h3>
+      <p data-translate="btnStreetlightsDesc">Faulty streetlights</p>
     </div>
+
     <div class="card" style="background: linear-gradient(135deg, #ffecd2, #fcb69f);" onclick="openForm()" role="listitem">
-      <h3 data-translate="btnWater">Water Leakage</h3><p data-translate="btnWaterDesc">Pipeline issues</p>
+      <h3 data-translate="btnWater">Water Leakage</h3>
+      <p data-translate="btnWaterDesc">Pipeline issues</p>
     </div>
+
     <div class="card" style="background: linear-gradient(135deg, #43e97b, #38f9d7);" onclick="openForm()" role="listitem">
-      <h3 data-translate="btnToilets">Public Toilets</h3><p data-translate="btnToiletsDesc">Cleanliness issues</p>
+      <h3 data-translate="btnToilets">Public Toilets</h3>
+      <p data-translate="btnToiletsDesc">Cleanliness issues</p>
     </div>
+
     <div class="card" style="background: linear-gradient(135deg, #fa709a, #fee140);" onclick="openForm()" role="listitem">
-      <h3 data-translate="btnOther">Other Complaints</h3><p data-translate="btnOtherDesc">Any other civic issue</p>
+      <h3 data-translate="btnOther">Other Complaints</h3>
+      <p data-translate="btnOtherDesc">Any other civic issue</p>
     </div>
+
     <div class="card" style="background: linear-gradient(135deg, #00c6ff, #0072ff);" onclick="openForm()" role="listitem">
-      <h3 data-translate="btnPark">Park Maintenance</h3><p data-translate="btnParkDesc">Broken benches, greenery care</p>
+      <h3 data-translate="btnParks">Park Maintenance</h3>
+      <p data-translate="btnParksDesc">Broken benches, greenery care</p>
     </div>
+
     <div class="card" style="background: linear-gradient(135deg, #ff9966, #ff5e62);" onclick="openForm()" role="listitem">
-      <h3 data-translate="btnSeasonal">Seasonal Issues</h3><p data-translate="btnSeasonalDesc">Monsoon flooding, heat waves</p>
+      <h3 data-translate="btnSeasonal">Seasonal Issues</h3>
+      <p data-translate="btnSeasonalDesc">Monsoon flooding, heat waves</p>
     </div>
+
     <div class="card" style="background: linear-gradient(135deg, #36d1dc, #5b86e5);" onclick="openForm()" role="listitem">
-      <h3 data-translate="btnTransport">Public Transport</h3><p data-translate="btnTransportDesc">Buses, stops & infrastructure</p>
+      <h3 data-translate="btnTransport">Public Transport</h3>
+      <p data-translate="btnTransportDesc">Buses, stops & infrastructure</p>
     </div>
   </div>
 
-  <!-- Statistics -->
+  <!-- Statistics Section -->
   <div class="stats">
     <h2 data-translate="statsTitle">📊 Civic Issue Statistics</h2>
-    <div class="stat-bar"><span data-translate="reportedIssues">Reported Issues</span>
+    <div class="stat-bar">
+      <span data-translate="reportedIssues">Reported Issues</span>
       <div class="progress"><div class="reported">60%</div></div>
     </div>
-    <div class="stat-bar"><span data-translate="inProgress">In Progress</span>
+    <div class="stat-bar">
+      <span data-translate="inProgress">In Progress</span>
       <div class="progress"><div class="progressing">30%</div></div>
     </div>
-    <div class="stat-bar"><span data-translate="resolved">Resolved</span>
+    <div class="stat-bar">
+      <span data-translate="resolved">Resolved</span>
       <div class="progress"><div class="resolved">10%</div></div>
     </div>
   </div>
 
-  <!-- Report Form Modal -->
-  <div id="reportForm" class="overlay">
-    <div class="form-box">
-      <button class="close" id="closeBtn">✖</button>
-      <h2 data-translate="reportIssueTitle">Report an Issue</h2>
-      <form id="issueForm">
-        <input type="text" name="title" data-translate="issueTitle" placeholder="Issue Title" required>
-        <textarea name="description" data-translate="issueDesc" placeholder="Describe the problem..." required></textarea>
+  <!-- Report Form Modal (overlay) -->
+  <div id="reportForm" class="overlay" aria-hidden="true" role="dialog" aria-labelledby="reportTitle">
+    <div class="form-box" role="document">
+      <button class="close" onclick="closeForm()" aria-label="Close">✖</button>
+      <h2 id="reportTitle" data-translate="reportTitle">Report an Issue</h2>
+      <form id="issueForm" enctype="multipart/form-data">
+        <input id="issueTitle" type="text" name="title" placeholder="" data-translate="reportIssueTitle" required>
+        <textarea id="issueDesc" name="description" placeholder="" data-translate="reportDesc" required></textarea>
         <input type="file" name="photo" accept="image/*" capture="environment" required>
-        <input type="text" name="location" data-translate="issueLocation" placeholder="Enter location or allow GPS" required>
-        <button type="submit" data-translate="issueSubmit">📸 Submit Report</button>
+        <input id="issueLocation" type="text" name="location" placeholder="" data-translate="reportLocation" required>
+        <button type="submit" id="submitReportBtn" data-translate="reportSubmit">📸 Submit Report</button>
       </form>
     </div>
   </div>
 
-  <!-- Manage Account Modal -->
-  <div id="manageAccount" class="overlay">
-    <div class="form-box">
-      <span class="close" onclick="closeSection('manageAccount')">✖</span>
-      <h2 data-translate="manageAccount">Manage My Account</h2>
-      <form id="accountForm">
-        <input type="text" id="accName" placeholder="Full Name">
-        <input type="tel" id="accMobile" placeholder="Mobile Number">
-        <input type="email" id="accEmail" placeholder="Email">
-        <select id="accState">
-          <option data-translate="stateAP">Andhra Pradesh</option>
-          <option data-translate="stateAS">Assam</option>
-          <option data-translate="stateBR">Bihar</option>
-          <option data-translate="stateDL">Delhi</option>
-          <option data-translate="stateGJ">Gujarat</option>
-          <option data-translate="stateHR">Haryana</option>
-          <option data-translate="stateKA">Karnataka</option>
-          <option data-translate="stateMH">Maharashtra</option>
-          <option data-translate="statePB">Punjab</option>
-          <option data-translate="stateRJ">Rajasthan</option>
-          <option data-translate="stateTN">Tamil Nadu</option>
-          <option data-translate="stateUP">Uttar Pradesh</option>
-          <option data-translate="stateWB">West Bengal</option>
-        </select>
-        <button type="submit" data-translate="saveChanges">Save Changes</button>
-      </form>
-    </div>
-  </div>
-
-  <!-- Report Status Modal -->
-  <div id="reportStatus" class="overlay">
-    <div class="form-box large">
-      <span class="close" onclick="closeSection('reportStatus')">✖</span>
-      <h2 data-translate="reportStatus">Report Status</h2>
-      <table class="status-table">
-        <thead>
-          <tr>
-            <th>Report</th>
-            <th data-translate="status">Status</th>
-          </tr>
-        </thead>
-        <tbody id="statusList"></tbody>
-      </table>
-    </div>
-  </div>
-
-  <!-- Feedback Modal -->
-  <div id="feedback" class="overlay">
-    <div class="form-box">
-      <span class="close" onclick="closeSection('feedback')">✖</span>
-      <h2 data-translate="feedback">My Feedback</h2>
-      <textarea id="feedbackText" placeholder="Write your feedback..."></textarea>
-      <button onclick="submitFeedback()" data-translate="submitFeedback">Submit Feedback</button>
-    </div>
-  </div>
-
-  <!-- Saved Locations Modal -->
-  <div id="savedLocations" class="overlay">
-    <div class="form-box">
-      <span class="close" onclick="closeSection('savedLocations')">✖</span>
-      <h2 data-translate="savedLocations">Saved Locations</h2>
-      <input type="text" id="locationInput" placeholder="Add new location">
-      <button onclick="saveLocation()" data-translate="save">Save</button>
-      <ul id="locationList"></ul>
-    </div>
-  </div>
-
-  <!-- Success Popup -->
-  <div id="successPopup" class="overlay">
-    <div class="form-box">
+  <!-- Success / Loading Popup -->
+  <div id="successPopup" class="popup-overlay" aria-hidden="true">
+    <div class="popup-box">
       <div id="popupContent"></div>
     </div>
   </div>
