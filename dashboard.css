@@ -1,389 +1,151 @@
-/* Reset small things */
-* { box-sizing: border-box; }
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CivicFix Dashboard</title>
 
-/* Page background + watermark */
-body {
-  margin: 0;
-  font-family: 'Poppins', sans-serif;
-  min-height: 100vh;
-  background: linear-gradient(to bottom right, #ff9933, #ffffff, #138808);
-  position: relative;
-  overflow-x: hidden;
-}
-body::before {
-  content: "";
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background: url("https://upload.wikimedia.org/wikipedia/commons/1/17/Ashoka_Chakra.svg") no-repeat center;
-  background-size: 60%;
-  opacity: 0.08;
-  width: 100%;
-  height: 100%;
-  z-index: -1;
-}
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
 
-/* Header */
-header {
-  background: rgba(0,0,0,0.8);
-  color: white;
-  padding: 12px 20px;
-  text-align: center;
-  border-bottom: 4px solid #138808;
-}
-.header-inner {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 14px;
-  flex-wrap: wrap;
-}
-.header-logo {
-  height: 56px;
-  width: auto;
-  flex: 0 0 auto;
-}
-.header-title {
-  font-size: 22px;
-  font-weight: 700;
-  color: #fff;
-  padding-right: 16px;
-}
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-/* Top search bar */
-.top-search {
-  background: #fff;
-  padding: 14px 12px;
-  text-align: center;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
-  position: relative;
-}
-.top-search input {
-  width: 70%;
-  max-width: 720px;
-  padding: 12px 18px;
-  border-radius: 25px;
-  border: 2px solid #ff9933;
-  font-size: 15px;
-}
-.top-search input:focus {
-  outline: none;
-  border-color: #138808;
-  box-shadow: 0 0 8px rgba(19,136,8,0.25);
-}
+  <!-- CSS -->
+  <link rel="stylesheet" href="dashboard.css">
+</head>
+<body>
 
-/* Mid search */
-.search-bar {
-  margin: 18px auto;
-  text-align: center;
-  position: relative;
-}
-.search-bar input {
-  padding: 10px 16px;
-  width: 60%;
-  max-width: 640px;
-  border: 2px solid #138808;
-  border-radius: 25px;
-  font-size: 15px;
-}
+  <!-- Header with Emblem + Account -->
+  <header>
+    <div class="header-inner">
+      <div style="display:flex; align-items:center; gap:12px;">
+        <img src="assets/civiclogo.png" alt="CivicFix logo" class="header-logo">
+        <div class="header-title">CivicFix – Crowd Powered Issue Reporting</div>
+      </div>
 
-/* Filters */
-.filters {
-  margin: 12px auto 24px;
-  text-align: center;
-  font-size: 15px;
-  font-weight: 600;
-}
-.filters label { margin: 0 10px; }
-.filters button {
-  margin-left: 16px;
-  padding: 9px 18px;
-  background: #138808;
-  color: #fff;
-  border: 2px solid #fff;
-  border-radius: 25px;
-  cursor: pointer;
-  transition: 0.2s;
-  font-weight: 600;
-}
-.filters button:hover { background: #0b5e29; }
+      <!-- Account Dropdown inside header -->
+      <div class="account-dropdown">
+        <button class="account-btn" aria-expanded="false" aria-haspopup="true">👤</button>
+        <div class="account-menu" role="menu" aria-hidden="true">
+          <a href="#" data-translate="manageAccount" id="acct-manage">Manage My Account</a>
+          <a href="#" data-translate="reportStatus" id="acct-status">Report Status</a>
+          <a href="#" data-translate="feedback" id="acct-feedback">My Feedback</a>
+          <a href="#" data-translate="savedLocations" id="acct-locations">Saved Locations</a>
+          <a href="index.html" data-translate="logout" id="acct-logout">Logout</a>
+        </div>
+      </div>
+    </div>
+  </header>
 
-/* Responsive grid for cards */
-.grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 22px;
-  padding: 16px;
-  max-width: 1200px;
-  margin: 0 auto;
-}
-.card {
-  border-radius: 14px;
-  border: 2px solid #fff;
-  box-shadow: 0 6px 15px rgba(0,0,0,0.22);
-  text-align: center;
-  padding: 20px;
-  cursor: pointer;
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
-  color: white;
-  font-family: 'Roboto', sans-serif;
-  font-weight: 500;
-}
-.card:hover {
-  transform: translateY(-6px) scale(1.02);
-  box-shadow: 0 12px 28px rgba(0,0,0,0.32);
-  border: 3px solid #ff9933;
-}
-.card h3 { margin: 10px 0; font-weight: 700; font-size: 20px; }
+  <!-- Top Search -->
+  <div class="top-search">
+    <input id="topSearch" type="text" placeholder="🔍 Search issue by keyword (e.g., pothole, garbage, streetlight)...">
+  </div>
 
-/* Stats block */
-.stats {
-  background: rgba(255,255,255,0.95);
-  padding: 18px;
-  margin: 20px;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.18);
-  max-width: 980px;
-  margin-left: auto;
-  margin-right: auto;
-}
-.stats h2 { text-align: center; color: #0b5e29; margin-bottom: 14px; }
-.stat-bar { margin: 12px 0; }
-.stat-bar span { font-weight: 600; }
-.progress { height: 20px; border-radius: 10px; background: #eee; overflow: hidden; margin-top: 6px; }
-.progress div { height: 100%; text-align: right; padding-right: 6px; color: white; font-size: 14px; font-weight: bold; }
-.reported { background: #ff9933; width: 60%; }
-.progressing { background: #138808; width: 30%; }
-.resolved { background: #0077b6; width: 10%; }
+  <!-- Filters -->
+  <div class="filters">
+    <strong data-translate="filterBy">Filter by Status:</strong>
+    <label><input type="radio" name="status"> <span data-translate="statusLabelReported">Reported</span></label>
+    <label><input type="radio" name="status"> <span data-translate="statusLabelProgress">In-Progress</span></label>
+    <label><input type="radio" name="status"> <span data-translate="statusLabelResolved">Resolved</span></label>
+    <button id="reportBtn" onclick="openForm()" data-translate="reportButton">+ Report Issue</button>
+  </div>
 
-/* Popup Overlay (Loading + Success) */
-.popup-overlay {
-  position: fixed;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  background: rgba(0,0,0,0.5);
-  display: none;
-  justify-content: center;
-  align-items: center;
-  z-index: 9999;
-}
-.popup-box {
-  background: #fff;
-  padding: 30px;
-  border-radius: 15px;
-  text-align: center;
-  font-size: 1.1rem;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.3);
-  min-width: 250px;
-}
-#popupContent { padding: 10px; }
+  <!-- Cards -->
+  <div class="grid" role="list">
+    <div class="card" style="background: linear-gradient(135deg, #ff6a88, #ffcc70);" onclick="openForm()" role="listitem">
+      <h3 data-translate="btnPotholes">Potholes</h3>
+      <p data-translate="btnPotholesDesc">Report road damages</p>
+    </div>
 
-/* Report Status Progress Bars */
-.progress-container {
-  background: #eee;
-  border-radius: 10px;
-  overflow: hidden;
-  height: 12px;
-  width: 100%;
-  margin-top: 5px;
-}
-.progress-fill {
-  height: 100%;
-  width: 0%;
-  transition: width 0.6s ease-in-out;
-  border-radius: 10px;
-}
-/* status color classes */
-.progress-fill.submitted { background: #dc3545; } /* red */
-.progress-fill.reached   { background: #ffc107; } /* yellow */
-.progress-fill.action    { background: #17a2b8; } /* blue */
-.progress-fill.fixed     { background: #28a745; } /* green */
-.status-label {
-  font-size: 0.9em;
-  margin-top: 3px;
-  color: #555;
-}
+    <div class="card" style="background: linear-gradient(135deg, #4facfe, #00f2fe);" onclick="openForm()" role="listitem">
+      <h3 data-translate="btnGarbage">Garbage</h3>
+      <p data-translate="btnGarbageDesc">Waste disposal issues</p>
+    </div>
 
-/* Account Dropdown (desktop styles) */
-.account-dropdown {
-  position: absolute;
-  top: 15px;
-  right: 20px;
-  z-index: 1100;
-}
-.account-btn {
-  width: 45px;
-  height: 45px;
-  border-radius: 50%;
-  background: #007bff;
-  color: #fff;
-  border: none;
-  font-size: 22px;
-  cursor: pointer;
-  transition: transform 0.2s, background 0.2s;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-}
-.account-btn:hover {
-  transform: scale(1.1);
-  background: #0056b3;
-}
-.account-menu {
-  display: none;
-  position: absolute;
-  top: 55px;
-  right: 0;
-  background: #fff;
-  border-radius: 10px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-  min-width: 200px;
-  z-index: 1001;
-  overflow: hidden;
-}
-.account-menu a {
-  display: block;
-  padding: 10px 15px;
-  color: #333;
-  text-decoration: none;
-  font-size: 14px;
-}
-.account-menu a:hover { background: #f2f2f2; }
+    <div class="card" style="background: linear-gradient(135deg, #f093fb, #f5576c);" onclick="openForm()" role="listitem">
+      <h3 data-translate="btnStreetlights">Streetlights</h3>
+      <p data-translate="btnStreetlightsDesc">Faulty streetlights</p>
+    </div>
 
-/* Overlay & Form Box (Account + Report Issue & others) */
-.overlay {
-  display: none;
-  position: fixed;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  background: rgba(0,0,0,0.5);
-  justify-content: center;
-  align-items: center;
-  z-index: 2000;
-}
-.form-box {
-  background: #fff;
-  padding: 25px;
-  border-radius: 15px;
-  width: 350px;
-  max-height: 80%;
-  overflow-y: auto;
-  text-align: center;
-  box-shadow: 0 5px 20px rgba(0,0,0,0.3);
-  position: relative;
-}
-.form-box.large { width: 600px; }
-.form-box h2 { margin-bottom: 15px; }
+    <div class="card" style="background: linear-gradient(135deg, #ffecd2, #fcb69f);" onclick="openForm()" role="listitem">
+      <h3 data-translate="btnWater">Water Leakage</h3>
+      <p data-translate="btnWaterDesc">Pipeline issues</p>
+    </div>
 
-/* Consolidated close button style (bigger & touch-friendly) */
-.form-box .close,
-.close {
-  position: absolute;
-  top: 12px;
-  right: 12px;
-  background: #fff;
-  border: 2px solid rgba(179,0,0,0.15);
-  color: #b30000;
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 18px;
-  cursor: pointer;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.12);
-  z-index: 10;
-}
-.form-box .close:hover,
-.close:hover { transform: scale(1.03); }
+    <div class="card" style="background: linear-gradient(135deg, #43e97b, #38f9d7);" onclick="openForm()" role="listitem">
+      <h3 data-translate="btnToilets">Public Toilets</h3>
+      <p data-translate="btnToiletsDesc">Cleanliness issues</p>
+    </div>
 
-/* form controls */
-.form-box input,
-.form-box select,
-.form-box textarea,
-.form-box button {
-  width: 100%;
-  margin: 8px 0;
-  padding: 10px;
-  border-radius: 8px;
-  border: 1px solid #ccc;
-}
-.form-box textarea { min-height: 120px; resize: vertical; }
-.form-box button {
-  background: #007bff;
-  color: #fff;
-  border: none;
-  cursor: pointer;
-  transition: background 0.2s;
-}
-.form-box button:hover { background: #0056b3; }
+    <div class="card" style="background: linear-gradient(135deg, #fa709a, #fee140);" onclick="openForm()" role="listitem">
+      <h3 data-translate="btnOther">Other Complaints</h3>
+      <p data-translate="btnOtherDesc">Any other civic issue</p>
+    </div>
 
-/* Report Status Table */
-.status-table {
-  width: 100%;
-  border-collapse: collapse;
-}
-.status-table th, .status-table td {
-  padding: 10px;
-  border-bottom: 1px solid #eee;
-  text-align: left;
-}
+    <div class="card" style="background: linear-gradient(135deg, #00c6ff, #0072ff);" onclick="openForm()" role="listitem">
+      <h3 data-translate="btnParks">Park Maintenance</h3>
+      <p data-translate="btnParksDesc">Broken benches, greenery care</p>
+    </div>
 
-/* Footer */
-footer {
-  background: rgba(0,0,0,0.85);
-  color: white;
-  text-align: center;
-  padding: 14px;
-  border-top: 4px solid #ff9933;
-  font-size: 14px;
-  font-weight: 500;
-}
-footer span { color: #ff9933; font-weight: 700; }
+    <div class="card" style="background: linear-gradient(135deg, #ff9966, #ff5e62);" onclick="openForm()" role="listitem">
+      <h3 data-translate="btnSeasonal">Seasonal Issues</h3>
+      <p data-translate="btnSeasonalDesc">Monsoon flooding, heat waves</p>
+    </div>
 
-/* Responsive tweaks */
-@media (max-width: 992px) {
-  .grid { grid-template-columns: repeat(2, 1fr); padding: 12px; }
-  .header-title { font-size: 18px; padding-right: 8px; }
-  .header-logo { height: 48px; }
-}
+    <div class="card" style="background: linear-gradient(135deg, #36d1dc, #5b86e5);" onclick="openForm()" role="listitem">
+      <h3 data-translate="btnTransport">Public Transport</h3>
+      <p data-translate="btnTransportDesc">Buses, stops & infrastructure</p>
+    </div>
+  </div>
 
-/* MOBILE: make inputs leave room for the floating account button, and fix menu position */
-@media (max-width: 600px) {
-  .grid { grid-template-columns: 1fr; gap: 14px; padding: 10px; }
-  .top-search input { /* keep visual width but leave room for account button */ width: calc(100% - 72px); max-width: none; }
-  .top-search { padding-right: 72px; } /* make space on right for account button so no overlap */
-  .search-bar input { width: calc(100% - 72px); max-width: none; }
-  .header-inner { gap: 10px; }
-  .header-logo { height: 44px; }
-  .header-title { font-size: 16px; text-align: center; }
+  <!-- Statistics Section -->
+  <div class="stats">
+    <h2 data-translate="statsTitle">📊 Civic Issue Statistics</h2>
+    <div class="stat-bar">
+      <span data-translate="reportedIssues">Reported Issues</span>
+      <div class="progress"><div class="reported">60%</div></div>
+    </div>
+    <div class="stat-bar">
+      <span data-translate="inProgress">In Progress</span>
+      <div class="progress"><div class="progressing">30%</div></div>
+    </div>
+    <div class="stat-bar">
+      <span data-translate="resolved">Resolved</span>
+      <div class="progress"><div class="resolved">10%</div></div>
+    </div>
+  </div>
 
-  /* Place account button fixed at top-right on mobile to avoid layout shifts */
-  .account-dropdown {
-    position: fixed;
-    top: 10px;
-    right: 10px;
-    z-index: 1200;
-  }
-  .account-menu {
-    right: 10px;
-    top: 60px;
-    min-width: 180px;
-  }
+  <!-- Report Form Modal (overlay) -->
+  <div id="reportForm" class="overlay" aria-hidden="true" role="dialog" aria-labelledby="reportTitle">
+    <div class="form-box" role="document">
+      <button class="close" onclick="closeForm()" aria-label="Close">✖</button>
+      <h2 id="reportTitle" data-translate="reportTitle">Report an Issue</h2>
+      <form id="issueForm" enctype="multipart/form-data">
+        <input id="issueTitle" type="text" name="title" placeholder="" data-translate="reportIssueTitle" required>
+        <textarea id="issueDesc" name="description" placeholder="" data-translate="reportDesc" required></textarea>
+        <input type="file" name="photo" accept="image/*" capture="environment" required>
+        <input id="issueLocation" type="text" name="location" placeholder="" data-translate="reportLocation" required>
+        <button type="submit" id="submitReportBtn" data-translate="reportSubmit">📸 Submit Report</button>
+      </form>
+    </div>
+  </div>
 
-  /* Make form-box a little larger on mobile devices */
-  .form-box { margin: 28px auto; padding: 16px; border-width: 3px; max-width: 94%; }
-  .form-box button[type="submit"] { width: 100%; }
+  <!-- Success / Loading Popup -->
+  <div id="successPopup" class="popup-overlay" aria-hidden="true">
+    <div class="popup-box">
+      <div id="popupContent"></div>
+    </div>
+  </div>
 
-  /* Ensure close button is accessible and doesn't overlap content on small modals */
-  .form-box .close { top: 8px; right: 8px; width: 44px; height: 44px; }
-  .popup-box { min-width: 220px; padding: 18px; }
+  <!-- Footer -->
+  <footer>
+    Powered by <span>Digital India</span> | Ministry of Urban Development, Govt. of India
+  </footer>
 
-  /* Status label spacing tweak */
-  .status-label { font-size: 0.95em; }
-}
-
-/* small extra helper: show account-menu when parent has .open (useful for JS) */
-.account-dropdown.open .account-menu { display: block; }
+  <!-- JS -->
+  <script src="lang.js"></script>
+  <script src="dashboard.js"></script>
+</body>
+</html>
