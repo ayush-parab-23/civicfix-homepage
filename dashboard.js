@@ -1,171 +1,232 @@
-// dashboard.js (corrected)
-// Uses translations[window.currentLang] (from lang.js)
+// dashboard.js - improved dashboard behavior, translatable popup & modals
 
-// ---------------- Account Menu ----------------
-function toggleAccountMenu() {
-  const menu = document.getElementById("accountMenu");
-  if (!menu) return;
-  menu.style.display = menu.style.display === "block" ? "none" : "block";
-}
-function openSection(id) {
-  const el = document.getElementById(id);
-  if (!el) return;
-  el.style.display = "flex";
-  // If opening reportStatus, refresh status table (ensures translations used)
-  if (id === "reportStatus" && typeof loadReportStatus === "function") {
-    loadReportStatus();
+// helper translation
+function t(key) {
+  if (window.currentLang && typeof translations !== "undefined" && translations[window.currentLang]) {
+    return translations[window.currentLang][key] || key;
   }
-}
-function closeSection(id) {
-  const el = document.getElementById(id);
-  if (!el) return;
-  el.style.display = "none";
+  return key;
 }
 
-// close account menu when clicking outside
-document.addEventListener("click", (e) => {
-  const menu = document.getElementById("accountMenu");
-  const btn = document.querySelector(".account-btn");
-  if (!menu || !btn) return;
-  if (!menu.contains(e.target) && !btn.contains(e.target)) {
-    menu.style.display = "none";
+document.addEventListener("DOMContentLoaded", () => {
+  if (typeof applyTranslations === "function") applyTranslations();
+
+  // Account menu toggle
+  const accountBtn = document.querySelector(".account-btn");
+  const accountDropdown = document.querySelector(".account-dropdown");
+  const accountMenu = document.querySelector(".account-menu");
+
+  if (accountBtn && accountDropdown) {
+    accountBtn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      accountDropdown.classList.toggle("open");
+      accountMenu.style.display = accountDropdown.classList.contains("open") ? "block" : "none";
+    });
   }
+
+  // close account menu on outside click
+  document.addEventListener("click", (e) => {
+    if (accountDropdown && !accountDropdown.contains(e.target)) {
+      accountDropdown.classList.remove("open");
+      if (accountMenu) accountMenu.style.display = "none";
+    }
+  });
+
+  // Account menu actions
+  document.querySelectorAll(".account-menu a").forEach(a => {
+    a.addEventListener("click", (ev) => {
+      ev.preventDefault();
+      const key = a.getAttribute("data-translate");
+      if (key === "manageAccount") openAccountModal();
+      if (key === "reportStatus") openStatusModal();
+      if (key === "feedback") openFeedbackModal();
+      if (key === "savedLocations") openSavedLocationsModal();
+      if (key === "logout") window.location.href = "index.html";
+      accountDropdown.classList.remove("open");
+      if (accountMenu) accountMenu.style.display = "none";
+    });
+  });
+
+  // Issue form submit
+  const issueForm = document.getElementById("issueForm");
+  if (issueForm) {
+    issueForm.addEventListener("submit", function (e) {
+      e.preventDefault();
+      showPopup("loading");
+      setTimeout(() => {
+        showPopup("success");
+        setTimeout(() => {
+          hidePopup();
+          closeForm();
+          issueForm.reset();
+          updateRandomStats();
+        }, 1200);
+      }, 900);
+    });
+  }
+
+  // initialize stats on load
+  updateRandomStats();
 });
 
-// ---------------- Report Form & Popup ----------------
+// ====== Randomized Statistics ======
+function updateRandomStats() {
+  const reported = document.querySelector(".reported");
+  const progressing = document.querySelector(".progressing");
+  const resolved = document.querySelector(".resolved");
+  if (!reported || !progressing || !resolved) return;
+
+  const r1 = Math.floor(Math.random() * 50) + 30;
+  const r2 = Math.floor(Math.random() * (100 - r1));
+  const r3 = 100 - (r1 + r2);
+
+  reported.style.width = r1 + "%"; reported.textContent = r1 + "%";
+  progressing.style.width = r2 + "%"; progressing.textContent = r2 + "%";
+  resolved.style.width = r3 + "%"; resolved.textContent = r3 + "%";
+}
+
+// ====== Report Form ======
 function openForm() {
   const f = document.getElementById("reportForm");
   if (!f) return;
+  if (typeof applyTranslations === "function") applyTranslations();
   f.style.display = "flex";
+  f.setAttribute("aria-hidden", "false");
+  const ta = document.getElementById("issueDesc");
+  if (ta) ta.value = "";
 }
-document.getElementById("closeBtn")?.addEventListener("click", () => {
+function closeForm() {
   const f = document.getElementById("reportForm");
-  if (f) f.style.display = "none";
-});
+  if (!f) return;
+  f.style.display = "none";
+  f.setAttribute("aria-hidden", "true");
+}
 
-document.getElementById("issueForm")?.addEventListener("submit", function (e) {
-  e.preventDefault();
-  // show loading -> then success (both translated)
-  showPopup("loading");
-  setTimeout(() => {
-    showPopup("success");
-  }, 1400);
-});
-
+// ====== Popups ======
 function showPopup(type) {
   const popup = document.getElementById("successPopup");
-  if (!popup) return;
   const content = document.getElementById("popupContent");
-  if (!content) return;
-  popup.style.display = "flex";
-
-  const t = translations && translations[window.currentLang] ? translations[window.currentLang] : null;
+  if (!popup || !content) return;
 
   if (type === "loading") {
-    content.innerHTML = `<p>${t ? t.loading : "Loading..."}</p>`;
+    content.innerHTML = `<div>${t("loading")}</div>`;
   } else {
-    content.innerHTML = `<p>${t ? t.submissionSuccess : "Report submitted successfully!"}</p>`;
-    setTimeout(() => {
-      popup.style.display = "none";
-      // hide form and reset it
-      const f = document.getElementById("reportForm");
-      if (f) f.style.display = "none";
-      const formEl = document.getElementById("issueForm");
-      if (formEl) formEl.reset();
-      // refresh status list if shown
-      if (document.getElementById("statusList") && typeof loadReportStatus === "function") {
-        loadReportStatus();
-      }
-    }, 1200);
+    content.innerHTML = `<div style="font-size:1.15rem;">✅ ${t("submissionSuccess")}</div>`;
   }
+  popup.style.display = "flex";
+}
+function hidePopup() {
+  const popup = document.getElementById("successPopup");
+  if (!popup) return;
+  popup.style.display = "none";
 }
 
-// ---------------- Manage Account ----------------
-document.getElementById("accountForm")?.addEventListener("submit", function (e) {
-  e.preventDefault();
-  alert(translations[window.currentLang]?.saveChanges ? "✅ " + translations[window.currentLang].saveChanges : "✅ Saved");
-  closeSection("manageAccount");
-});
-
-// ---------------- Report Status (progress + translations) ----------------
-// Mapping english status string → percent & css-class & translation key
-const statusSteps = {
-  "Submitted": 25,
-  "Reached Authorities": 50,
-  "Action Started": 75,
-  "Fixed": 100
-};
-const statusClass = {
-  "Submitted": "submitted",
-  "Reached Authorities": "reached",
-  "Action Started": "action",
-  "Fixed": "fixed"
-};
-const statusKeyMap = {
-  "Submitted": "statusSubmitted",
-  "Reached Authorities": "statusReached",
-  "Action Started": "statusAction",
-  "Fixed": "statusFixed"
-};
-
-// Dummy reports (server/backend can replace)
-const dummyReports = [
-  { title: "Pothole near MG Road", status: "Submitted" },
-  { title: "Streetlight not working", status: "Reached Authorities" },
-  { title: "Garbage issue", status: "Action Started" },
-  { title: "Water leakage", status: "Fixed" }
-];
-
-function loadReportStatus() {
-  const list = document.getElementById("statusList");
-  if (!list) return;
-  list.innerHTML = "";
-
-  dummyReports.forEach((r) => {
-    const percent = statusSteps[r.status] || 0;
-    const cls = statusClass[r.status] || "";
-    const key = statusKeyMap[r.status] || null;
-    const translatedLabel = key && translations[window.currentLang] && translations[window.currentLang][key]
-      ? translations[window.currentLang][key]
-      : r.status;
-
-    const tr = document.createElement("tr");
-    tr.innerHTML = `
-      <td style="vertical-align: middle;">${r.title}</td>
-      <td>
-        <div class="progress-container" aria-hidden="true">
-          <div class="progress-fill ${cls}" style="width:${percent}%"></div>
-        </div>
-        <div class="status-label">${translatedLabel}</div>
-      </td>
+// ====== Modal Creator ======
+function createModal(id, titleKey, innerHTML) {
+  let modal = document.getElementById(id);
+  if (!modal) {
+    modal = document.createElement("div");
+    modal.className = "overlay";
+    modal.id = id;
+    modal.innerHTML = `
+      <div class="form-box large">
+        <button class="close" onclick="document.getElementById('${id}').style.display='none'">✖</button>
+        <h2 data-translate="${titleKey}"></h2>
+        <div class="modal-body">${innerHTML}</div>
+      </div>
     `;
-    list.appendChild(tr);
-  });
+    document.body.appendChild(modal);
+    if (typeof applyTranslations === "function") applyTranslations();
+  }
+  modal.style.display = "flex";
 }
 
-// attach loading call to the account item (works if that element exists)
-document.querySelector("[onclick*='reportStatus']")?.addEventListener("click", loadReportStatus);
+// ====== Account Features ======
+function openAccountModal() {
+  createModal("accountModal", "manageAccount", `
+    <label>${t("loginName")}</label>
+    <input type="text" id="acc_name" placeholder="${t("loginName")}">
+    <label>${t("loginMobile")}</label>
+    <input type="tel" id="acc_mobile" placeholder="${t("loginMobile")}">
+    <label>${t("loginEmail")}</label>
+    <input type="email" id="acc_email" placeholder="${t("loginEmail")}">
+    <button onclick="saveAccountDetails()">${t("save")}</button>
+  `);
+}
+function saveAccountDetails() {
+  const name = document.getElementById("acc_name")?.value || "";
+  const mobile = document.getElementById("acc_mobile")?.value || "";
+  const email = document.getElementById("acc_email")?.value || "";
+  localStorage.setItem("acct_name", name);
+  localStorage.setItem("acct_mobile", mobile);
+  localStorage.setItem("acct_email", email);
+  alert(t("saveChanges"));
+  const modal = document.getElementById("accountModal");
+  if (modal) modal.style.display = "none";
+}
 
-// ---------------- Feedback ----------------
+// ====== Report Status ======
+function openStatusModal() {
+  const reports = [
+    { title: "Pothole near MG Road", statusKey: "statusSubmitted", percent: 25, cls: "submitted" },
+    { title: "Streetlight not working", statusKey: "statusAction", percent: 75, cls: "action" },
+    { title: "Garbage not collected", statusKey: "statusReached", percent: 50, cls: "reached" },
+    { title: "Water leakage", statusKey: "statusFixed", percent: 100, cls: "fixed" }
+  ];
+  let rows = `<table class="status-table"><tr><th>Issue</th><th>Status</th></tr>`;
+  reports.forEach(r => {
+    rows += `<tr>
+      <td>${r.title}</td>
+      <td>
+        <div class="progress-container">
+          <div class="progress-fill ${r.cls}" style="width:${r.percent}%"></div>
+        </div>
+        <div class="status-label" data-translate="${r.statusKey}">${t(r.statusKey)}</div>
+      </td>
+    </tr>`;
+  });
+  rows += `</table>`;
+  createModal("statusModal", "reportStatus", rows);
+}
+
+// ====== Feedback ======
+function openFeedbackModal() {
+  createModal("feedbackModal", "feedback", `
+    <textarea id="feedbackText" placeholder="${t("submitFeedback")}"></textarea>
+    <button onclick="submitFeedback()">${t("submitFeedback")}</button>
+  `);
+}
 function submitFeedback() {
-  const feedback = document.getElementById("feedbackText")?.value || "";
-  if (feedback.trim() === "") {
-    alert(translations[window.currentLang]?.submitFeedback ? translations[window.currentLang].submitFeedback : "Please write feedback!");
+  const text = document.getElementById("feedbackText")?.value || "";
+  if (!text.trim()) {
+    alert(t("submitFeedback"));
     return;
   }
-  alert("✅ " + (translations[window.currentLang]?.submitFeedback || "Feedback submitted!"));
-  document.getElementById("feedbackText").value = "";
-  closeSection("feedback");
+  alert(t("submitFeedback"));
+  const modal = document.getElementById("feedbackModal");
+  if (modal) modal.style.display = "none";
 }
 
-// ---------------- Saved Locations ----------------
+// ====== Saved Locations ======
+function openSavedLocationsModal() {
+  createModal("savedLocationsModal", "savedLocations", `
+    <ul id="locationList">
+      <li>Home</li>
+      <li>Work</li>
+      <li>Market</li>
+    </ul>
+    <input id="locationInput" placeholder="Add a location">
+    <button onclick="saveLocation()">${t("save")}</button>
+  `);
+}
 function saveLocation() {
   const input = document.getElementById("locationInput");
   const list = document.getElementById("locationList");
   if (!input || !list) return;
-  if (input.value.trim() === "") return;
+  const v = input.value.trim();
+  if (!v) return;
   const li = document.createElement("li");
-  li.textContent = input.value;
+  li.textContent = v;
   list.appendChild(li);
   input.value = "";
 }
