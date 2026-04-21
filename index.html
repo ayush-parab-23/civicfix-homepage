@@ -19,11 +19,15 @@
 
   <!-- Custom CSS -->
   <link rel="stylesheet" href="style.css">
+  <!-- SweetAlert2 -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
+  <!-- Govt Strip -->
+  <div class="gov-strip"></div>
 
   <!-- Header / Navbar -->
-  <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top shadow-sm">
+  <nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top shadow-sm">
     <div class="container">
       <!-- CivicFix refresh button -->
       <a class="navbar-brand fw-bold d-flex align-items-center" href="javascript:location.reload();">
@@ -42,7 +46,7 @@
 
           <!-- Language Selector -->
           <li class="nav-item dropdown ms-3">
-            <a class="btn btn-outline-primary dropdown-toggle" href="#" id="langDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <a class="btn btn-outline-secondary dropdown-toggle" href="#" id="langDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               EN
             </a>
             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="langDropdown">
@@ -62,10 +66,8 @@
       <div class="bg-text-box">
         <h1 class="fw-bold" data-translate="heroTitle">Empower Your City</h1>
         <p data-translate="heroDesc">Report civic issues in real-time and track resolutions.</p>
-        <a href="#" class="btn btn-lg btn-warning mt-3" data-bs-toggle="modal" data-bs-target="#loginModal" data-translate="getStarted">Get Started</a>
+        <a href="#" class="btn btn-lg btn-warning fw-bold mt-3" data-bs-toggle="modal" data-bs-target="#loginModal" data-translate="getStarted">Get Started</a>
       </div>
-      <img src="assets/civicfor12.png" alt="Icon"
-           class="position-absolute bottom-0 end-0 me-3 mb-3">
     </div>
   </section>
   
@@ -74,28 +76,28 @@
     <div class="container text-center">
       <h2 class="fw-bold mb-5" data-translate="features">Key Features</h2>
       <div class="row g-4 flex-column align-items-center">
-        <div class="col-md-6 col-lg-4">
+        <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="100">
           <div class="card h-100 shadow-sm border-0">
             <div class="card-body">
-              <i class="fa-solid fa-camera feature-icon mb-3 text-primary"></i>
+              <i class="fa-solid fa-camera feature-icon mb-3"></i>
               <h5 class="card-title fw-bold" data-translate="feature1Title">Photo Reports</h5>
               <p class="card-text" data-translate="feature1Desc">Capture and send photos of issues instantly from your phone.</p>
             </div>
           </div>
         </div>
-        <div class="col-md-6 col-lg-4">
+        <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="200">
           <div class="card h-100 shadow-sm border-0">
             <div class="card-body">
-              <i class="fa-solid fa-location-dot feature-icon mb-3 text-primary"></i>
+              <i class="fa-solid fa-location-dot feature-icon mb-3"></i>
               <h5 class="card-title fw-bold" data-translate="feature2Title">Auto Location Tagging</h5>
               <p class="card-text" data-translate="feature2Desc">Automatically tag your current location for accurate reporting.</p>
             </div>
           </div>
         </div>
-        <div class="col-md-6 col-lg-4">
+        <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="300">
           <div class="card h-100 shadow-sm border-0">
             <div class="card-body">
-              <i class="fa-solid fa-bolt feature-icon mb-3 text-primary"></i>
+              <i class="fa-solid fa-bolt feature-icon mb-3"></i>
               <h5 class="card-title fw-bold" data-translate="feature3Title">Fast Routing</h5>
               <p class="card-text" data-translate="feature3Desc">System routes issues to the right department instantly.</p>
             </div>
@@ -238,18 +240,7 @@
   <script src="script.js"></script>
   <script>AOS.init();</script>
 
-  <!-- Redirect to dashboard after login -->
-  <script>
-  document.addEventListener("DOMContentLoaded", function() {
-    const loginForm = document.getElementById("loginForm");
-    if (loginForm) {
-      loginForm.addEventListener("submit", function(e) {
-        e.preventDefault();
-        window.location.href = "dashboard.html";
-      });
-    }
-  });
-  </script>
+
 
   <!-- Login Modal -->
   <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">

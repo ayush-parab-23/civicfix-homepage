@@ -13,6 +13,8 @@
 
   <!-- CSS -->
   <link rel="stylesheet" href="dashboard.css">
+  <!-- SweetAlert2 -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
 
@@ -24,15 +26,19 @@
         <div class="header-title">CivicFix – Crowd Powered Issue Reporting</div>
       </div>
 
-      <!-- Account Dropdown inside header -->
-      <div class="account-dropdown">
-        <button class="account-btn" aria-expanded="false" aria-haspopup="true">👤</button>
-        <div class="account-menu" role="menu" aria-hidden="true">
-          <a href="#" data-translate="manageAccount" id="acct-manage">Manage My Account</a>
-          <a href="#" data-translate="reportStatus" id="acct-status">Report Status</a>
-          <a href="#" data-translate="feedback" id="acct-feedback">My Feedback</a>
-          <a href="#" data-translate="savedLocations" id="acct-locations">Saved Locations</a>
-          <a href="index.html" data-translate="logout" id="acct-logout">Logout</a>
+      <!-- Action Buttons & Account Dropdown -->
+      <div style="display: flex; gap: 16px; align-items: center; margin-left: auto;">
+        <button style="background:none; border:1px solid #FF9933; color:white; padding:8px 16px; border-radius:6px; cursor:pointer;" onclick="openStatusModal()"><i class="fa-solid fa-list-check"></i> My Reports</button>
+        <button style="background:none; border:1px solid #FF9933; color:white; padding:8px 16px; border-radius:6px; cursor:pointer;" onclick="openFaqModal()"><i class="fa-solid fa-circle-question"></i> Help & FAQs</button>
+        
+        <div class="account-dropdown" style="position: relative; top: auto; right: auto;">
+          <button class="account-btn" aria-expanded="false" aria-haspopup="true">👤</button>
+          <div class="account-menu" role="menu" aria-hidden="true" style="top:50px;">
+            <a href="#" data-translate="manageAccount" id="acct-manage">Manage My Account</a>
+            <a href="#" data-translate="feedback" id="acct-feedback">My Feedback</a>
+            <a href="#" data-translate="savedLocations" id="acct-locations">Saved Locations</a>
+            <a href="index.html" data-translate="logout" id="acct-logout">Logout</a>
+          </div>
         </div>
       </div>
     </div>
@@ -54,47 +60,56 @@
 
   <!-- Cards -->
   <div class="grid" role="list">
-    <div class="card" style="background: linear-gradient(135deg, #ff6a88, #ffcc70);" onclick="openForm()" role="listitem">
+    <div class="card" onclick="openForm()" role="listitem">
+      <i class="fa-solid fa-road icon-lg mb-2" style="color:var(--primary-color);"></i>
       <h3 data-translate="btnPotholes">Potholes</h3>
       <p data-translate="btnPotholesDesc">Report road damages</p>
     </div>
 
-    <div class="card" style="background: linear-gradient(135deg, #4facfe, #00f2fe);" onclick="openForm()" role="listitem">
+    <div class="card" onclick="openForm()" role="listitem">
+      <i class="fa-solid fa-trash icon-lg mb-2" style="color:var(--primary-color);"></i>
       <h3 data-translate="btnGarbage">Garbage</h3>
       <p data-translate="btnGarbageDesc">Waste disposal issues</p>
     </div>
 
-    <div class="card" style="background: linear-gradient(135deg, #f093fb, #f5576c);" onclick="openForm()" role="listitem">
+    <div class="card" onclick="openForm()" role="listitem">
+      <i class="fa-solid fa-lightbulb icon-lg mb-2" style="color:var(--primary-color);"></i>
       <h3 data-translate="btnStreetlights">Streetlights</h3>
       <p data-translate="btnStreetlightsDesc">Faulty streetlights</p>
     </div>
 
-    <div class="card" style="background: linear-gradient(135deg, #ffecd2, #fcb69f);" onclick="openForm()" role="listitem">
+    <div class="card" onclick="openForm()" role="listitem">
+      <i class="fa-solid fa-droplet icon-lg mb-2" style="color:var(--primary-color);"></i>
       <h3 data-translate="btnWater">Water Leakage</h3>
       <p data-translate="btnWaterDesc">Pipeline issues</p>
     </div>
 
-    <div class="card" style="background: linear-gradient(135deg, #43e97b, #38f9d7);" onclick="openForm()" role="listitem">
+    <div class="card" onclick="openForm()" role="listitem">
+      <i class="fa-solid fa-restroom icon-lg mb-2" style="color:var(--primary-color);"></i>
       <h3 data-translate="btnToilets">Public Toilets</h3>
       <p data-translate="btnToiletsDesc">Cleanliness issues</p>
     </div>
 
-    <div class="card" style="background: linear-gradient(135deg, #fa709a, #fee140);" onclick="openForm()" role="listitem">
+    <div class="card" onclick="openForm()" role="listitem">
+      <i class="fa-solid fa-triangle-exclamation icon-lg mb-2" style="color:var(--primary-color);"></i>
       <h3 data-translate="btnOther">Other Complaints</h3>
       <p data-translate="btnOtherDesc">Any other civic issue</p>
     </div>
 
-    <div class="card" style="background: linear-gradient(135deg, #00c6ff, #0072ff);" onclick="openForm()" role="listitem">
+    <div class="card" onclick="openForm()" role="listitem">
+      <i class="fa-solid fa-tree icon-lg mb-2" style="color:var(--primary-color);"></i>
       <h3 data-translate="btnParks">Park Maintenance</h3>
       <p data-translate="btnParksDesc">Broken benches, greenery care</p>
     </div>
 
-    <div class="card" style="background: linear-gradient(135deg, #ff9966, #ff5e62);" onclick="openForm()" role="listitem">
+    <div class="card" onclick="openForm()" role="listitem">
+      <i class="fa-solid fa-cloud-sun-rain icon-lg mb-2" style="color:var(--primary-color);"></i>
       <h3 data-translate="btnSeasonal">Seasonal Issues</h3>
       <p data-translate="btnSeasonalDesc">Monsoon flooding, heat waves</p>
     </div>
 
-    <div class="card" style="background: linear-gradient(135deg, #36d1dc, #5b86e5);" onclick="openForm()" role="listitem">
+    <div class="card" onclick="openForm()" role="listitem">
+      <i class="fa-solid fa-bus icon-lg mb-2" style="color:var(--primary-color);"></i>
       <h3 data-translate="btnTransport">Public Transport</h3>
       <p data-translate="btnTransportDesc">Buses, stops & infrastructure</p>
     </div>
@@ -125,7 +140,9 @@
       <form id="issueForm" enctype="multipart/form-data">
         <input id="issueTitle" type="text" name="title" placeholder="" data-translate="reportIssueTitle" required>
         <textarea id="issueDesc" name="description" placeholder="" data-translate="reportDesc" required></textarea>
-        <input type="file" name="photo" accept="image/*" capture="environment" required>
+        <!-- Photo upload made optional for easier integration testing without mobile constraints -->
+        <input type="file" id="issuePhoto" name="photo" accept="image/*" capture="environment">
+        <img id="photoPreview" style="display:none; width:100%; height:160px; object-fit:cover; border-radius:10px; margin-bottom:10px; border:2px solid var(--accent-color, #ff9933);" alt="Preview">
         <input id="issueLocation" type="text" name="location" placeholder="" data-translate="reportLocation" required>
         <button type="submit" id="submitReportBtn" data-translate="reportSubmit">📸 Submit Report</button>
       </form>
