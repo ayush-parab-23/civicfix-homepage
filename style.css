@@ -4,27 +4,56 @@
     padding: 0;
     box-sizing: border-box;
 }
-  
+
 :root {
-    --primary-color: #1E90FF; /* Dodger Blue */
-    --accent-color: #FFA500;  /* Orange */
-    --bg-light: #f9f9f9;
-    --text-dark: #333;
-    --white: #fff;
+    --primary-color: #0D47A1; /* Deep Government Blue */
+    --accent-color: #FF9933;  /* Saffron minimal accent */
+    --bg-light: #F3F4F6;
+    --text-dark: #1F2937;
+    --white: #ffffff;
+    --india-green: #138808;
 }
-  
+
 body {
     font-family: 'Inter', sans-serif;
     line-height: 1.6;
     color: var(--text-dark);
     padding-top: 70px;
+    background-color: var(--bg-light);
 }
-  
+
+/* Top Govt Strip */
+.gov-strip {
+    height: 4px;
+    background: linear-gradient(90deg, #FF9933 33.33%, #FFFFFF 33.33%, #FFFFFF 66.66%, #138808 66.66%);
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1040;
+}
+
+/* Header Navbar */
+.navbar {
+    margin-top: 4px; /* below the strip */
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.btn-primary-gov {
+    background-color: var(--primary-color) !important;
+    border-color: var(--primary-color) !important;
+    color: var(--white) !important;
+}
+.btn-primary-gov:hover {
+    background-color: #08306B !important;
+    border-color: #08306B !important;
+}
+
 /* Hero Section */
 .hero {
-    min-height: 100vh;
-    padding: 100px 0;
-    background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),
+    min-height: 80vh;
+    padding: 80px 0;
+    background: linear-gradient(rgba(13, 71, 161, 0.88), rgba(13, 71, 161, 0.88)),
                 url('assets/civicback1.jpg') center/cover no-repeat;
     position: relative;
     display: flex;
@@ -33,73 +62,119 @@ body {
     text-align: center;
     color: white;
 }
-  
+
 .bg-text-box {
-    background: rgba(0,0,0,0.5);
-    max-width: 700px;
+    max-width: 800px;
     padding: 2rem;
-    border-radius: 10px;
     margin: auto;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
 }
-  
+
 .hero h1 {
-    font-size: 3rem;
-    font-weight: 800;
-    background: linear-gradient(90deg, #ff9933, #ffffff, #138808); /* Tricolor */
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    text-shadow: 2px 2px 6px rgba(0,0,0,0.4);
+    font-size: 3.2rem;
+    font-weight: 700;
+    color: var(--white);
     margin-bottom: 20px;
 }
-  
+
 .hero p {
     font-size: 1.25rem;
-    color: #f0f0f0;
+    color: #e0e0e0;
     margin-bottom: 30px;
-    text-shadow: 1px 1px 4px rgba(0,0,0,0.5);
 }
-  
-.hero img.position-absolute {
-    width: 180px;
-    opacity: 0.9;
-}
-  
-/* Features section (vertical alignment) */
-#features .row {
-    flex-direction: column;
-    align-items: center;
+
+/* Features section */
+#features {
+    background-color: var(--white);
 }
 
 .feature-icon {
     font-size: 2.5rem;
     color: var(--primary-color);
 }
-  
+.card {
+    border-radius: 8px;
+    border: 1px solid #e5e7eb;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+.card-title {
+    color: var(--primary-color);
+}
+
 /* About section */
 #about {
     padding: 3rem 2rem;
     background-color: var(--bg-light);
     text-align: center;
 }
-  
 #about h2 {
+    color: var(--primary-color);
     margin-bottom: 1rem;
 }
-  
+
+/* Problems Section */
+#demo-problems {
+    background-color: var(--white);
+}
+.problem-card img {
+    height: 220px;
+    object-fit: cover;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+}
+.problem-card {
+    border-radius: 8px;
+    border: 1px solid #e5e7eb;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.problem-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 15px rgba(0,0,0,0.1);
+}
+
+/* Reviews Section */
+#reviews {
+    background-color: var(--bg-light);
+}
+.review-card {
+    max-width: 600px;
+    background: var(--white);
+    border-radius: 8px;
+    border: 1px solid #e5e7eb;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+}
+#reviews img {
+    border: 3px solid var(--primary-color);
+    object-fit: cover;
+}
+
 /* Footer */
 footer {
-    background-color: rgb(24, 141, 208);
+    background-color: var(--primary-color);
     color: white;
     text-align: center;
+    border-top: 4px solid var(--accent-color);
     padding: 2rem 1rem;
 }
 
 .modal-content {
-    border-radius: 12px;
-    box-shadow: 0 4px 24px rgba(0,0,0,0.2);
+    border-radius: 8px;
+    border: none;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
 }
-  
+.modal-header {
+    background-color: var(--primary-color);
+    color: white;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+}
+.modal-title {
+    color: white;
+}
+.modal-header .btn-close {
+    filter: invert(1);
+}
+
 /* Responsive */
 @media (max-width: 768px) {
     .hero {
@@ -107,7 +182,7 @@ footer {
     }
   
     .bg-text-box {
-      width: 90%;
+      width: 95%;
       padding: 1.2rem;
     }
   
@@ -118,64 +193,4 @@ footer {
     .hero p {
       font-size: 1rem;
     }
-  
-    .hero img.position-absolute {
-      width: 100px;
-      right: 1rem;
-      bottom: 1rem;
-    }
-  
-    nav .navbar-brand img {
-      width: 28px;
-      height: 28px;
-    }
-  
-    footer {
-      font-size: 0.9rem;
-    }
-}
-
-/* Problems Demo Section */
-#demo-problems {
-  background-color: var(--bg-light);
-}
-
-.problem-card img {
-  height: 220px;
-  object-fit: cover;
-  border-top-left-radius: 10px;
-  border-top-right-radius: 10px;
-}
-
-.problem-card {
-  border-radius: 10px;
-  overflow: hidden;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.problem-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 8px 20px rgba(0,0,0,0.25);
-}
-
-/* Reviews Section */
-#reviews {
-  background: linear-gradient(135deg, #f9f9f9, #e9f2ff);
-}
-
-.review-card {
-  max-width: 600px;
-  background: white;
-  border-radius: 12px;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.15);
-  transition: transform 0.2s ease;
-}
-
-.review-card:hover {
-  transform: translateY(-5px);
-}
-
-#reviews img {
-  border: 3px solid var(--primary-color);
-  object-fit: cover;
 }
